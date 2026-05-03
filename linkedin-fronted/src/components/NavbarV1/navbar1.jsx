@@ -1,5 +1,5 @@
 import React from "react";
-import linkedinLogo from "../Image/Linkedin_logo.png";
+import linkedinLogo from "../../assets/Linkedin_logo.png";
 
 const Navbar1 = () => {
   return (
