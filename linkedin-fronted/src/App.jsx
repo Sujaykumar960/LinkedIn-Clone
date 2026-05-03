@@ -4,6 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import Navbar1 from './components/NavbarV1/navbar1'
 import LandingPage from './pages/LandingPage/landingPage'
+import Footer from './components/Footer/footer'
 
 import './App.css'
 
@@ -14,6 +15,7 @@ function App() {
     <div className='bg-gray-100 w-full box-border'>
       <Navbar1 />
       <LandingPage />
+      <Footer />
     </div>
   )
 }
