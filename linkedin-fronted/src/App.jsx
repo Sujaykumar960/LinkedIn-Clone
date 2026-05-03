@@ -11,7 +11,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className='bg-gray-100 w-[100%] box-border'>
+    <div className='bg-gray-100 w-full box-border'>
       <Navbar1 />
       <LandingPage />
     </div>
