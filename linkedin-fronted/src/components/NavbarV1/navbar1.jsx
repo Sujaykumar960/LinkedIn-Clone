@@ -14,7 +14,7 @@ const Navbar1 = () => {
 
       <div className="flex box-border md:gap-4 gap-2 justify-center items-center">
         <Link to="/signUp" className="md:px-4 md:py-2 box-border text-black rounded-3xl text-xl hover:bg-gray-400 cursor-pointer">Join now</Link>
-        <div className="px-5 py-2 box-border border-2 text-blue-900 border-blue-600 rounded-3xl text-xl hover:bg-blue-300 cursor-pointer">Sign in</div>
+        <Link to="/login" className="px-5 py-2 box-border border-2 text-blue-900 border-blue-600 rounded-3xl text-xl hover:bg-blue-300 cursor-pointer">Sign in</Link>
       </div>
 
     </nav>
