@@ -7,7 +7,7 @@ const Navbar1 = () => {
     <nav className="w-full bg-gray-100 md:px-25 px-5 flex justify-between py-4 box-border">
       <Link to="/" className="flex justify-between">
         <div className="flex gap-1 items-center cursor-pointer">
-          <h3 className="text-blue-800 font-bold text-3xl">LinkedIn</h3>
+          <h3 className="text-blue-800 font-bold text-3xl ">LinkedIn</h3>
           <img src={linkedinLogo} alt="LinkedIn Logo" className="w-9 h-9" />
         </div>
       </Link>
