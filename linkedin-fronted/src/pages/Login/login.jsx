@@ -33,7 +33,7 @@ function Login() {
 
         </div>
 
-        <div className='mt-4 mb-10 flex gap-1'>New to LinkedIn? <Link to={'/Login'} className='text-blue-800 cursor-pointer'>Login</Link></div>
+        <div className='mt-4 mb-10 flex gap-1'>New to LinkedIn? <Link to={'/SignUp'} className='text-blue-800 cursor-pointer'>Login</Link></div>
     </div>
   )
 }
