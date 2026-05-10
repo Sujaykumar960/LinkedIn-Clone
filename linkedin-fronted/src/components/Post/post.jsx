@@ -55,14 +55,6 @@ const Post = () => {
                 </form>
             </div>
         </div>
-        <div className='p-4 w-full'>
-            <div className='flex gap-2 items-center'>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" className='rounded-full w-10 h-10 border-2 border-white cursor-pointer' />
-                <form action="" className='w-full'>
-                    <input type="text" placeholder='Add a comment...' className='w-full border-1 py-3 px-5 rounded-3xl hover:bg-gray-100'/>
-                </form>
-            </div>
-        </div>
 
     </Card>
   )
