@@ -12,9 +12,10 @@ const Modal = (props) => {
                 </div>
                 <div className='cursor-pointer'><CloseIcon /></div>
             </div>
+            <div className='mt-5'>
+                {props.children}
+            </div>
         </div>
-
-        {props.children}
 
     </div>
   )
