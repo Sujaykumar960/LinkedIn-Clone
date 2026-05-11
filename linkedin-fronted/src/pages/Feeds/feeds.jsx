@@ -72,7 +72,18 @@ const Feeds = () => {
       <div className='w-[26%] py-5 hidden md:block'>
         
         <div>
-          
+          <Card padding={1}>
+            <div className='text-xl'>LinkedIn News</div>
+            <div className='text-gray-600'> Top Stories</div>
+            <div className='my-1'>
+              <div className='text-md'>Buffet to remain Berkshire Chair</div>
+              <div className='text-xs text-gray-400'>2 hours ago</div>
+            </div>
+            <div className='my-1'>
+              <div className='text-md'>Foreign Invesments sure again</div>
+              <div className='text-xs text-gray-400'>4 hours ago</div>
+            </div>
+          </Card>
         </div>
         <div className='my-5 sticky top-19'>
           <Advertisement />
