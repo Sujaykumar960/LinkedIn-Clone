@@ -6,8 +6,11 @@ import ImageIcon from '@mui/icons-material/Image';
 import ArticleIcon from '@mui/icons-material/Article';
 import Advertisement from '../../components/Advertisement/advertisement'
 import Post from '../../components/Post/post'
+import Modal from '../../components/Modal/modal';
 
 const Feeds = () => {
+  
+  const [addPostModal, setAddPostModal] = React.useState(false);
   return (
     <div className='px-5 xl:px-50 py-9 flex gap-5 w-full mt-5 bg-gray-100'>
       {/* left side bar */}
@@ -89,6 +92,10 @@ const Feeds = () => {
           <Advertisement />
         </div>
       </div>
+
+      <Modal title={"Add a Post"}>
+        <div>Hii This is children</div>
+      </Modal>
     </div>
   )
 }
