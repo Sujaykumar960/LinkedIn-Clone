@@ -62,6 +62,8 @@ const Feeds = () => {
 
         <div className='w-full flex flex-col gap-5'>
           <Post />
+
+          <Post />
         </div>
 
       </div>
