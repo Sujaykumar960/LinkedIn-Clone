@@ -9,8 +9,11 @@ import SendIcon from '@mui/icons-material/Send';
 
 const Post = () => {
     const [seeMore, setSeeMore] = useState(false);
-    const desc = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus.`;
+    const handleSendComment = (e)=>{
+        e.preventDefault();
+    }
 
+    const desc = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus.`;
   return (
     <Card padding={0}>
         <div className='flex gap-3 p-4'>
@@ -50,10 +53,14 @@ const Post = () => {
         <div className='p-4 w-full'>
             <div className='flex gap-2 items-center'>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" className='rounded-full w-10 h-10 border-2 border-white cursor-pointer' />
-                <form action="" className='w-full'>
+                <form action="" className='w-full flex gap-2' onSubmit={handleSendComment}>
                     <input type="text" placeholder='Add a comment...' className='w-full border-1 py-3 px-5 rounded-3xl hover:bg-gray-100'/>
+                    <button type='submit' className='cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3'>Send</button>
                 </form>
             </div>
+
+            {/* Other's comment section */}
+
         </div>
 
     </Card>
