@@ -3,6 +3,8 @@ import Card from '../../components/Card/card'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import Conversation from '../../components/Conversation/conversation';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ImageIcon from '@mui/icons-material/Image';
+import Advertisement from '../../components/Advertisement/advertisement';
 
 const Messages = () => {
   return (
@@ -43,13 +45,51 @@ const Messages = () => {
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="User" className='w-16 h-16 rounded-full cursor-pointer' />
                                     <div className='my-2'>
                                         <p className='text-md'>User 1</p>
-                                        <p className='text-sm text-gray-400'>Hi this is user 1</p>
+                                        <p className='text-sm text-gray-500'>Hi this is user 1</p>
                                     </div>
+                                </div>
+
+                                <div className='w-full'>
+                                    {/* For each message in messages */}
+                                    <div className='flex w-full cursor-pointer border-gray-300 gap-3 p-4'>
+                                        <div className='shrink-0'>
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="User" className='w-8 h-8 rounded-[100%] cursor-pointer' />
+                                        </div>
+                                        <div className='mb-2 w-full'>
+                                            <div className='text-md'>User 1</div>
+                                            <div className='text-sm mt-6 hover:bg-gray-200'>This is text message</div>
+
+                                            <div className='my-2'><img src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" className='w-[240px] h-[180px] rounded-md'/></div>
+                                        </div>
+                                    </div> 
+                                    
+                                </div>
+                            </div>
+
+                            {/* Space for typing message */}
+                            <div className='p-2 w-full border-b border-gray-200'>
+                                <textarea rows={4} name="" id="" className='bg-gray-200 outline-0 rounded-xl text-sm w-full p-3' placeholder='Write a message'></textarea>
+                            </div>
+
+                            <div className='p-3 flex justify-between items-center'>
+                                <div>
+                                    <label htmlFor="messageImage" className='cursor-pointer'><ImageIcon /></label>
+                                    <input type="file" id='messageImage' className='hidden'/>
+                                </div>
+                                <div className='px-3 py-1 cursor-pointer rounded-2xl border bg-blue-800 text-white'>
+                                    Send
                                 </div>
                             </div>
                         </div>
                     </div>
                 </Card>
+            </div>
+
+            {/* right side */}
+            <div className='hidden md:flex md:w-[25%]'>
+                <div className='sticky top-19'>
+                    <Advertisement />
+                </div>
             </div>
         </div>
     </div>
