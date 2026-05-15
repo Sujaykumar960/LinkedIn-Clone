@@ -1,6 +1,8 @@
 import React from 'react'
 import Card from '../../components/Card/card'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import Conversation from '../../components/Conversation/conversation';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const Messages = () => {
   return (
@@ -22,9 +24,27 @@ const Messages = () => {
                     <div className='w-full md:flex md:flex'>
                         <div className='h-[590px] overflow-auto w-full md:w-[40%] border-r-1 border-gray-400'>
                             {/* For Each chat Conversation */}
-                            <div className='flex items-center w-full cursor-pointer border-b-1 border-gray-300 gap-3 p-4 hover:bg-gray-200' >
+                            <Conversation />
+                        </div>
+
+
+                        <div className='border-gray-400overflow-auto w-full md:w-[60%]'>
+                            {/* Chat Area */}
+                            <div className='border-gray-300 py-2 px-4 border-b-2 flex justify-between items-center'>
                                 <div>
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="avatar" className='w-10 h-10 rounded-full' />
+                                    <p className='text-sm font-semibold'>User 1</p>
+                                    <p className='text-sm text-gray-400'>Hi this is user 1</p>
+                                </div>
+                                <div><MoreHorizIcon /></div>
+                            </div>
+
+                            <div className='h-[360px] w-full overflow-auto border-b-1 border-gray-300'>
+                                <div className='w-full border-b-1 border-gray-300 gap-3 p-4' >
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="User" className='w-16 h-16 rounded-full cursor-pointer' />
+                                    <div className='my-2'>
+                                        <p className='text-md'>User 1</p>
+                                        <p className='text-sm text-gray-400'>Hi this is user 1</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
