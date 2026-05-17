@@ -60,10 +60,10 @@ const Navbar2 = () => {
           <MessageIcon sx={{color:location.pathname==='/messages'?"black":"gray"}} />
           <div className={`text-sm text-gray-500 ${location.pathname === '/messages' ? 'border-b-3':''}`}>Messaging</div>
         </Link>
-        <div className="flex flex-col items-center cursor-pointer">
+        <Link to={'/notifications'} className="flex flex-col items-center cursor-pointer">
           <div><NotificationsIcon sx={{color:location.pathname==='/notifications'?"black":"gray"}}/> <span className="p-1 rounded-full text-sm bg-red-700 text-white">1</span> </div>
           <div className={`text-sm text-gray-500 ${location.pathname === '/notifications' ? 'border-b-3':''}`}>Notifications</div>
-        </div>
+        </Link>
 
         <div className="flex flex-col items-center cursor-pointer">
           <img className="w-10 h-10 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" />
