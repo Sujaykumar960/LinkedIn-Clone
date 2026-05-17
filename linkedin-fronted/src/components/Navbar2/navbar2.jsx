@@ -44,7 +44,26 @@ const Navbar2 = () => {
       </div>
 
       <div className="hidden gap-10 md:flex">
-        
+        <Link to={'/feeds'} className="flex flex-col items-center cursor-pointer">
+          <HomeIcon sx={{color:location.pathname==='/feeds'?"black":"gray"}}/>
+          <div className={`text-sm text-gray-500 ${location.pathname === '/feeds' ? 'border-b-3':''}`}>Home</div>
+        </Link>
+        <Link to={'/myNetwork'} className="flex flex-col items-center cursor-pointer">
+          <GroupIcon sx={{color:location.pathname==='/myNetwork'?"black":"gray"}}/>
+          <div className={`text-sm text-gray-500 ${location.pathname === '/myNetwork' ? 'border-b-3':''}`}>My Network</div>
+        </Link>
+        <Link to={'/resume'} className="flex flex-col items-center cursor-pointer">
+          <WorkIcon sx={{color:location.pathname==='/resume'?"black":"gray"}}/>
+          <div className={`text-sm text-gray-500 ${location.pathname === '/resume' ? 'border-b-3':''}`}>Resume</div>
+        </Link>
+        <Link to={'/messages'} className="flex flex-col items-center cursor-pointer">
+          <MessageIcon sx={{color:location.pathname==='/messages'?"black":"gray"}} />
+          <div className={`text-sm text-gray-500 ${location.pathname === '/messages' ? 'border-b-3':''}`}>Messaging</div>
+        </Link>
+        <Link to={'/notifications'} className="flex flex-col items-center cursor-pointer">
+          <div><NotificationsIcon sx={{color:location.pathname==='/notifications'?"black":"gray"}}/> <span className="p-1 rounded-full text-sm bg-red-700 text-white">1</span> </div>
+          <div className={`text-sm text-gray-500 ${location.pathname === '/notifications' ? 'border-b-3':''}`}>Notifications</div>
+        </Link>
 
         <div className="flex flex-col items-center cursor-pointer">
           <img className="w-10 h-10 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" />
