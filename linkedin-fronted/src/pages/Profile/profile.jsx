@@ -25,7 +25,19 @@ const Profile = () => {
                         <div className='text-sm text-gray-500'>Delhi, India</div>
                         <div className='text-md text-blue-800 w-fit cursor-pointer hover:underline'>2 connections</div>
 
-                        
+                        <div className='md:flex w-full justify-between'>
+                          <div className='my-5 flex gap-5'>
+                            <div className='cursor-pointer p-2 border-1 rounded-lg bg-blue-800 text-white font-semibold'>Open to</div>
+                            <div className='cursor-pointer p-2 border-1 rounded-lg bg-blue-800 text-white font-semibold'>Share</div>
+                            <div className='cursor-pointer p-2 border-1 rounded-lg bg-blue-800 text-white font-semibold'>Logout</div>
+                          </div>
+                          <div className='my-5 flex gap-5'>
+                            <div className='cursor-pointer p-2 border-1 rounded-lg bg-blue-800 text-white font-semibold'>Open to</div>
+                            <div className='cursor-pointer p-2 border-1 rounded-lg bg-blue-800 text-white font-semibold'>Share</div>
+                          </div>
+                        </div>
+
+
                       </div>
                     </div>
 
