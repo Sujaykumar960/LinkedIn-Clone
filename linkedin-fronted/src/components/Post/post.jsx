@@ -7,7 +7,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import SendIcon from "@mui/icons-material/Send";
 
-const Post = () => {
+const Post = ({profile}) => {
   const [seeMore, setSeeMore] = useState(false);
   const [comment, setComment] = useState(false);
 
@@ -17,7 +17,7 @@ const Post = () => {
 
   const desc = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus.`;
   return (
-    <Card padding={0}>
+    <Card padding={0} className="w-full">
       <div className="flex gap-3 p-4">
         <div className="w-12 h-12 rounded-4xl">
           <img
@@ -43,11 +43,7 @@ const Post = () => {
       </div>
 
       <div className="w-[100%] h-[100%]">
-        <img
-          src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk="
-          alt=""
-          className="w-full"
-        />
+        <img src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" className="w-full" />
       </div>
 
       <div className="my-2 p-4 flex justify-between items-center">
@@ -60,18 +56,22 @@ const Post = () => {
         </div>
       </div>
 
-      <div className="flex p-1">
+      {
+        !profile && (
+          <div className="flex p-1">
         <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
           <ThumbUpIcon sx={{ fontSize: 22, color: "blue" }} />{" "}
           <span>Like</span>{" "}
         </div>
-        <div onClick={()=>setComment(true)} className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
+        <div onClick={() => setComment(true)} className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
           <CommentIcon sx={{ fontSize: 22 }} /> <span>Comment</span>{" "}
         </div>
         <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
           <SendIcon sx={{ fontSize: 22 }} /> <span>Share</span>{" "}
         </div>
       </div>
+        )
+      }
 
       {/* Comment Section */}
       {comment && (

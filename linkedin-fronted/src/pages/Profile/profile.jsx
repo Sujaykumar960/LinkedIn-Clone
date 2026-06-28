@@ -2,6 +2,7 @@ import React from 'react'
 import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
 import EditIcon from '@mui/icons-material/Edit';
+import Post from '../../components/Post/post';
 
 
 const Profile = () => {
@@ -72,6 +73,30 @@ const Profile = () => {
 
                   </div>
                 </Card>
+              </div>
+
+              <div className='mt-5'>
+                <Card padding={1}>
+                  <div className='flex justify-between items-center'>
+                    <div className='text-xl'>Activities</div>
+                  </div>
+                  <div className='cursor-pointer px-3 py-1 w-fit border-1 rounded-4xl bg-green-800 text-white font-semibold'>Posts</div>
+
+                  {/* Parent div for scrollable Activities */}
+                  <div className='overflow-x-auto my-2 flex gap-1 overflow-y-hidden w-full'>
+                    <div className='cursor-pointer shrink-0 w-[350px]'>
+                      <Post profile={1}/>
+                    </div>
+                    <div className='cursor-pointer shrink-0 w-[350px]'>
+                      <Post profile={1}/>
+                    </div>
+                    <div className='cursor-pointer shrink-0 w-[350px]'>
+                      <Post profile={1}/>
+                    </div>
+
+                  </div>
+                </Card>
+
               </div>
             </div>
 
