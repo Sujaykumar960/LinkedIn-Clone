@@ -1,6 +1,8 @@
 import React from 'react'
 import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
+import EditIcon from '@mui/icons-material/Edit';
+
 
 const Profile = () => {
   return (
@@ -13,7 +15,7 @@ const Profile = () => {
                 <Card padding={0}>
                   <div className='w-full h-fit bg-gray-200'>
                     <div className='relative w-full h-[200px]'>
-
+                      <div className='absolute cursor-pointer top-3 right-3 z-20 w-[35px] flex justify-center items-center h-[35px] rounded-full p-3 bg-white'><EditIcon /></div>
                       <img className='w-full h-[200px] rounded-tr-lg rounded-tl-lg' src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" />
                       <div className='absolute object-cover top-24 left-6 z-10'><img className='rounded-full border-2 border-white cursor-pointer w-30 h-30' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" /></div>
                     </div>
@@ -45,6 +47,16 @@ const Profile = () => {
 
                 </Card>
               </div>
+
+              <div className='my-5'>
+                <Card padding={1}>
+                  <div className='flex justify-between items-center'>
+                    <div className='text-xl'>About</div>
+                  </div>
+                  <div className='text-gray-700 text-md w-[80%]'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum officia iure facere! Eum reprehenderit ad eius quaerat asperiores quo totam et, dolores sit magnam earum aliquid corrupti saepe ab animi?</div>
+                </Card>
+              </div>
+              
             </div>
 
             <div className='hidden md:flex md:w-[28%]'>
