@@ -66,10 +66,7 @@ const Profile = () => {
                     <div className='text-xl'>Skills</div>
                   </div>
                   <div className='text-gray-700 text-md my-2 w-full flex gap-4 flex-wrap'>
-                    <div className='py-1 px-2 cursor-pointer bg-blue-800 text-white rounded-lg'>React JS</div>
-                    <div className='py-1 px-2 cursor-pointer bg-blue-800 text-white rounded-lg'>Node JS</div>
-                    <div className='py-1 px-2 cursor-pointer bg-blue-800 text-white rounded-lg'>Express JS</div>
-                    <div className='py-1 px-2 cursor-pointer bg-blue-800 text-white rounded-lg'>MongoDB</div>
+                    
 
                   </div>
                 </Card>
