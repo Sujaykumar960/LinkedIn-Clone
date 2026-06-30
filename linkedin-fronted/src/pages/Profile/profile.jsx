@@ -96,6 +96,12 @@ const Profile = () => {
 
                   </div>
                 </Card>
+              </div>
+
+              <div className='mt-5'>
+                <Card padding={1}>
+
+                </Card>
 
               </div>
             </div>
