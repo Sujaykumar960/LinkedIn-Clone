@@ -3,6 +3,7 @@ import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
 import EditIcon from '@mui/icons-material/Edit';
 import Post from '../../components/Post/post';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const Profile = () => {
@@ -100,7 +101,34 @@ const Profile = () => {
 
               <div className='mt-5'>
                 <Card padding={1}>
+                  <div className='flex justify-between items-center'>
+                    <div className='text-xl'>Experience</div>
+                    <div className='cursor-pointer'><AddIcon /></div>
+                  </div>
 
+                  <div className='mt-5'>
+
+                    <div className='p-2 border-t-1 border-gray-300 flex justify-between'>
+                      <div>
+                        <div className='text-lg'>DSE Engineer | Full stack Engineer</div>
+                        <div className='text-sm'>Amazon</div>
+                        <div className='text-sm text-gray-500'>March 2022, Present</div>
+                        <div className='text-sm text-gray-500'>Delhi, India</div>
+                      </div>
+                      <div className='cursor-pointer'><EditIcon /></div>
+                    </div>
+                    
+                    <div className='p-2 border-t-1 border-gray-300 flex justify-between'>
+                      <div>
+                        <div className='text-lg'>DSE Engineer | Full stack Engineer</div>
+                        <div className='text-sm'>Amazon</div>
+                        <div className='text-sm text-gray-500'>March 2022, Present</div>
+                        <div className='text-sm text-gray-500'>Delhi, India</div>
+                      </div>
+                      <div className='cursor-pointer'><EditIcon /></div>
+                    </div>
+
+                  </div>
                 </Card>
 
               </div>
