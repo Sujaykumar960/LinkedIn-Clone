@@ -1,12 +1,32 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
 import EditIcon from '@mui/icons-material/Edit';
 import Post from '../../components/Post/post';
 import AddIcon from '@mui/icons-material/Add';
+import Modal from '../../components/Modal/modal'
+import ImageModal from '../../components/ImageModal/imageModal';
 
 
 const Profile = () => {
+
+  const [imageSetModal, setImageModal] = useState(false);
+  const [circularImage,setCircularImage] = useState(true);
+
+  const handleImageModalOpenClose = () => {
+    setImageModal(prev => !prev);
+  }
+
+  const handleOnEditCover = () => {
+    setImageModal(true);
+    setCircularImage(false);
+  }
+
+  const handleCircularImageOpen = () => {
+    setImageModal(true);
+    setCircularImage(true);
+  }
+  
   return (
     <div className='px-5 xl:px-50 py-5 mt-5 flex flex-col gap-5 w-full pt-12 bg-gray-100'>
         <div className='flex justify-between'>
@@ -17,9 +37,9 @@ const Profile = () => {
                 <Card padding={0}>
                   <div className='w-full h-fit bg-gray-200'>
                     <div className='relative w-full h-[200px]'>
-                      <div className='absolute cursor-pointer top-3 right-3 z-20 w-[35px] flex justify-center items-center h-[35px] rounded-full p-3 bg-white'><EditIcon /></div>
+                      <div className='absolute cursor-pointer top-3 right-3 z-20 w-[35px] flex justify-center items-center h-[35px] rounded-full p-3 bg-white' onClick={handleOnEditCover}><EditIcon /></div>
                       <img className='w-full h-[200px] rounded-tr-lg rounded-tl-lg' src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" />
-                      <div className='absolute object-cover top-24 left-6 z-10'><img className='rounded-full border-2 border-white cursor-pointer w-30 h-30' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" /></div>
+                      <div className='absolute object-cover top-24 left-6 z-10' onClick={handleCircularImageOpen}><img className='rounded-full border-2 border-white cursor-pointer w-30 h-30' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" /></div>
                     </div>
 
                     <div className='mt-10 relative px-8 py-2'>
@@ -145,6 +165,13 @@ const Profile = () => {
             </div>
 
         </div>
+
+        {
+          imageSetModal && (<Modal title="Upload Image" closeModal={handleImageModalOpenClose}> 
+              <ImageModal isCircular={circularImage}/>
+            </Modal>
+          )
+        }
     
     </div>
   )
