@@ -6,6 +6,7 @@ import Post from '../../components/Post/post';
 import AddIcon from '@mui/icons-material/Add';
 import Modal from '../../components/Modal/modal'
 import ImageModal from '../../components/ImageModal/imageModal';
+import EditInfoModal from '../../components/EditInfoModal/editInfoModal';
 
 
 const Profile = () => {
@@ -14,6 +15,10 @@ const Profile = () => {
   const [circularImage,setCircularImage] = useState(true);
 
   const [infoModal, setInfoModal] = useState(false);
+
+  const handleInfoModal = () => {
+    setInfoModal(prev => !prev);
+  }
 
   const handleImageModalOpenClose = () => {
     setImageModal(prev => !prev);
@@ -45,7 +50,7 @@ const Profile = () => {
                     </div>
 
                     <div className='mt-10 relative px-8 py-2'>
-                      <div className='absolute cursor-pointer top-0 right-3 z-20 w-[35px] flex justify-center items-center h-[35px] rounded-full p-3 bg-white'><EditIcon /></div>
+                      <div className='absolute cursor-pointer top-0 right-3 z-20 w-[35px] flex justify-center items-center h-[35px] rounded-full p-3 bg-white' onClick={handleInfoModal}><EditIcon /></div>
                       <div className='w-full'>
                         <div className='text-2xl'>User 1</div>
                         <div className='text-gray-700'>Software Engineer</div>
@@ -173,6 +178,12 @@ const Profile = () => {
               <ImageModal isCircular={circularImage}/>
             </Modal>
           )
+        }
+
+        {
+          infoModal && <Modal title="Edit Info" closeModal={handleInfoModal}>
+            <EditInfoModal />
+          </Modal>
         }
     
     </div>
