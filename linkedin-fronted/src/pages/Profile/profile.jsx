@@ -7,6 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Modal from '../../components/Modal/modal'
 import ImageModal from '../../components/ImageModal/imageModal';
 import EditInfoModal from '../../components/EditInfoModal/editInfoModal';
+import AboutModal from '../../components/AboutModal/aboutModal';
 
 
 const Profile = () => {
@@ -16,6 +17,10 @@ const Profile = () => {
 
   const [infoModal, setInfoModal] = useState(false);
   const [aboutModal, setAboutModal] = useState(false)
+
+  const handleAboutModal = () => {
+    setAboutModal(prev => !prev);
+  }
 
   const handleInfoModal = () => {
     setInfoModal(prev => !prev);
@@ -83,7 +88,7 @@ const Profile = () => {
                 <Card padding={1}>
                   <div className='flex justify-between items-center'>
                     <div className='text-xl'>About</div>
-                    <div className='cursor-pointer'><EditIcon /></div>
+                    <div className='cursor-pointer' onClick={handleAboutModal}><EditIcon /></div>
                   </div>
                   <div className='text-gray-700 text-md w-[80%]'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum officia iure facere! Eum reprehenderit ad eius quaerat asperiores quo totam et, dolores sit magnam earum aliquid corrupti saepe ab animi?</div>
                 </Card>
@@ -187,9 +192,11 @@ const Profile = () => {
           </Modal>
         }
 
-        <Modal >
-
-        </Modal>
+        {
+          aboutModal && <Modal title="About" closeModal={handleAboutModal}>
+            <AboutModal />
+          </Modal>
+        }
     
     </div>
   )
