@@ -13,6 +13,8 @@ const Profile = () => {
   const [imageSetModal, setImageModal] = useState(false);
   const [circularImage,setCircularImage] = useState(true);
 
+  const [infoModal, setInfoModal] = useState(false);
+
   const handleImageModalOpenClose = () => {
     setImageModal(prev => !prev);
   }
