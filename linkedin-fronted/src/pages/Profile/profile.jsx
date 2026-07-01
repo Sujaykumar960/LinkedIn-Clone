@@ -15,6 +15,7 @@ const Profile = () => {
   const [circularImage,setCircularImage] = useState(true);
 
   const [infoModal, setInfoModal] = useState(false);
+  const [aboutModal, setAboutModal] = useState(false)
 
   const handleInfoModal = () => {
     setInfoModal(prev => !prev);
@@ -185,6 +186,10 @@ const Profile = () => {
             <EditInfoModal />
           </Modal>
         }
+
+        <Modal >
+
+        </Modal>
     
     </div>
   )
