@@ -2,6 +2,8 @@ import React from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
 import Advertisement from '../../components/Advertisement/advertisement'
 import { useParams } from 'react-router-dom'
+import Card from '../../components/Card/card'
+import Post from '../../components/Post/post'
 
 const AllActivities = () => {
     const { id } = useParams();
@@ -22,7 +24,24 @@ const AllActivities = () => {
       {/* middle content */}
       <div className='w-[100%] py-5 sm:w-[50%]'>
 
-      
+        <div>
+            <Card padding={1}>
+                <div className='text-xl'>All Activities</div>
+                <div className='cursor-pointer w-fit p-2 border-1 rounded-4xl bg-green-800 my-2 text-white font-semibold'>Posts</div>
+
+                <div className='my-2 flex flex-col gap-2'>
+                    
+                    <div>
+                        <Post />
+                    </div>
+                    
+                    <div>
+                        <Post />
+                    </div>
+
+                </div>
+            </Card>
+        </div>
 
 
 
