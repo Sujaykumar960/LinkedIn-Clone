@@ -9,7 +9,8 @@ import Modal from '../../components/Modal/modal'
 import ImageModal from '../../components/ImageModal/imageModal';
 import EditInfoModal from '../../components/EditInfoModal/editInfoModal';
 import AboutModal from '../../components/AboutModal/aboutModal';
-
+import ExpModal from '../../components/ExpModal/expModal';
+import MessageModal from '../../components/MessageModal/messageModal';
 
 const Profile = () => {
 
@@ -17,7 +18,17 @@ const Profile = () => {
   const [circularImage,setCircularImage] = useState(true);
 
   const [infoModal, setInfoModal] = useState(false);
-  const [aboutModal, setAboutModal] = useState(false)
+  const [aboutModal, setAboutModal] = useState(false);
+  const [expModal, setExpModal] = useState(false);
+  const [messageModal, setMessageModal] = useState(false);
+
+  const handleMessageModal = () => {
+    setMessageModal(prev => !prev);
+  }
+
+  const handleExpModal = () => {
+    setExpModal(prev => !prev);
+  }
 
   const handleAboutModal = () => {
     setAboutModal(prev => !prev);
@@ -137,7 +148,7 @@ const Profile = () => {
                 <Card padding={1}>
                   <div className={clsx('flex', 'justify-between', 'items-center')}>
                     <div className='text-xl'>Experience</div>
-                    <div className='cursor-pointer'><AddIcon /></div>
+                    <div className='cursor-pointer' onClick={handleExpModal}><AddIcon /></div>
                   </div>
 
                   <div className='mt-5'>
@@ -196,6 +207,18 @@ const Profile = () => {
         {
           aboutModal && <Modal title="Edit About" closeModal={handleAboutModal}>
             <AboutModal /> 
+          </Modal>
+        }
+
+        {
+          expModal && <Modal title="Experience" closeModal={handleExpModal}>
+            <ExpModal />
+          </Modal>
+        }
+
+        {
+          messageModal && <Modal title="Send Message" closeModal={handleMessageModal}>
+            <MessageModal />
           </Modal>
         }
     
