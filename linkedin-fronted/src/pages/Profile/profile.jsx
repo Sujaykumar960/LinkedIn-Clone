@@ -135,15 +135,16 @@ const Profile = () => {
 
                   {/* Parent div for scrollable Activities */}
                   <div className={clsx('overflow-x-auto', 'my-2', 'flex', 'gap-1', 'overflow-y-hidden', 'w-full')}>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
+
+                    <Link to={`/profile/${id}/activities/111`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
-                    </div>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
+                    </Link>
+                    <Link to={`/profile/${id}/activities/112`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
-                    </div>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
+                    </Link>
+                    <Link to={`/profile/${id}/activities/113`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
-                    </div>
+                    </Link>
 
                   </div>
 
