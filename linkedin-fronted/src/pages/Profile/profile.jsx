@@ -82,8 +82,8 @@ const Profile = () => {
                             <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Logout</div>
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
-                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Open to</div>
-                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Share</div>
+                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div>
+                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Connect</div>
                           </div>
                         </div>
 
