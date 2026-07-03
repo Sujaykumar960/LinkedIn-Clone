@@ -11,8 +11,13 @@ import EditInfoModal from '../../components/EditInfoModal/editInfoModal';
 import AboutModal from '../../components/AboutModal/aboutModal';
 import ExpModal from '../../components/ExpModal/expModal';
 import MessageModal from '../../components/MessageModal/messageModal';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Link } from 'react-router-dom';
+
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
+  const { id } = useParams();
 
   const [imageSetModal, setImageModal] = useState(false);
   const [circularImage,setCircularImage] = useState(true);
@@ -130,16 +135,20 @@ const Profile = () => {
 
                   {/* Parent div for scrollable Activities */}
                   <div className={clsx('overflow-x-auto', 'my-2', 'flex', 'gap-1', 'overflow-y-hidden', 'w-full')}>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]')}>
+                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
                     </div>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]')}>
+                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
                     </div>
-                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]')}>
+                    <div className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
                       <Post profile={1}/>
                     </div>
 
+                  </div>
+
+                  <div className='w-full flex justify-center items-center'>
+                    <Link to={`/profile/${id}/activities`} className='p-2 rounded-xl cursor-pointer hover:bg-gray-300'>Show all Posts <ArrowForwardIcon /></Link>
                   </div>
                 </Card>
               </div>
