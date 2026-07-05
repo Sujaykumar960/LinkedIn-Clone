@@ -59,4 +59,26 @@ const UserSchema = new mongoose.Schema({
             }
         }
     ],
-})
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+        }
+    ],
+    pending_friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "user",
+        }
+    ],
+    resume: {
+        type: String,
+    },
+},
+{
+    timestamps: true
+});
+
+const userModel = mongoose.model("user", UserSchema);
+module.exports = userModel;
+// Now one module is created
