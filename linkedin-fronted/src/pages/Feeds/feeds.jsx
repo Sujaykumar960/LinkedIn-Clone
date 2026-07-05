@@ -8,6 +8,7 @@ import Advertisement from '../../components/Advertisement/advertisement'
 import Post from '../../components/Post/post'
 import Modal from '../../components/Modal/modal';
 import AddModal from '../../components/AddModal/addModal';
+import Loader from '../../components/Loader/loader';
 
 const Feeds = () => {
   
@@ -94,6 +95,7 @@ const Feeds = () => {
           <AddModal />
         </Modal>
       }
+
     </div>
   )
 }

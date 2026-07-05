@@ -60,9 +60,9 @@ const Navbar2 = () => {
           <MessageIcon sx={{color:location.pathname==='/messages'?"black":"gray"}} />
           <div className={`text-sm text-gray-500 ${location.pathname === '/messages' ? 'border-b-3':''}`}>Messaging</div>
         </Link>
-        <Link to={'/notifications'} className="flex flex-col items-center cursor-pointer">
-          <div><NotificationsIcon sx={{color:location.pathname==='/notifications'?"black":"gray"}}/> <span className="p-1 rounded-full text-sm bg-red-700 text-white">1</span> </div>
-          <div className={`text-sm text-gray-500 ${location.pathname === '/notifications' ? 'border-b-3':''}`}>Notifications</div>
+        <Link to={'/notification'} className="flex flex-col items-center cursor-pointer">
+          <div><NotificationsIcon sx={{color:location.pathname==='/notification'?"black":"gray"}}/> <span className="p-1 rounded-full text-sm bg-red-700 text-white">1</span> </div>
+          <div className={`text-sm text-gray-500 ${location.pathname === '/notification' ? 'border-b-3':''}`}>Notifications</div>
         </Link>
 
         <Link to={`/profile/jghu`} className="flex flex-col items-center cursor-pointer">
