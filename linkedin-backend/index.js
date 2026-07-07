@@ -1,16 +1,22 @@
 const express = require('express');
 const app = express();
+const cookieParser = require('cookie-parser')
 
 require('./connection');
+require('dotenv').config({path: "./config.env"});
+
+const PORT = process.env.PORT || 4000;
+
+app.use(express.json());
+app.use(cookieParser());
+
+const UserRoutes = require('./routes/user')
 
 
 
-app.get('/', (req, res) => {
-    res.send({
-        message: "Congratulation you have created a backend server"
-    })
-})
 
-app.listen(4000, () => {
-    console.log("Backend Server is running on port 4000")
+app.use('/api/users', UserRoutes)
+
+app.listen(PORT, () => {
+    console.log("Backend Server is running on port", PORT)
 })
