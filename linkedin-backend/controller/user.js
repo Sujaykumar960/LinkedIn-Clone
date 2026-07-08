@@ -1,10 +1,12 @@
 const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
+const { OAuth2Client } = require('google-auth-library');
 
 
 
 exports.loginThroughGmail = async(req, res) => {
     try{
+        const { token } = req.body;
         
     }catch(err){
         console.error(err);
