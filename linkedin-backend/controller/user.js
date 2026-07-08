@@ -4,10 +4,32 @@ const { OAuth2Client } = require('google-auth-library');
 
 
 
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 exports.loginThroughGmail = async(req, res) => {
     try{
         const { token } = req.body;
-        
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID
+        });
+        const payload = ticket.getPayload();
+
+        const {sub, email, name, picture} = payload;
+
+        const userExist = await User.findOne({email});
+        if(!userExist){
+            // Register New User
+            userExist = await User.create({
+                googleId: sub,
+                email,
+                f_name: name,
+                profilePic: picture
+            });
+        }
+        return res.status(200).json({ user: userExist });
+
     }catch(err){
         console.error(err);
         res.status(500).json({ error: 'server error',message:err.message });
