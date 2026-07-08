@@ -11,11 +11,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 const UserRoutes = require('./routes/user')
+const AuthRoutes = require('./routes/auth')
 
 
 
 
 app.use('/api/users', UserRoutes)
+app.use('/api/auth', AuthRoutes)
 
 app.listen(PORT, () => {
     console.log("Backend Server is running on port", PORT)

@@ -2,6 +2,16 @@ const User = require('../models/user');
 const bcryptjs = require('bcryptjs');
 
 
+
+exports.loginThroughGmail = async(req, res) => {
+    try{
+        
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
+}
+
 exports.register = async (req, res) => {
     try{
         let {email, password, f_name} = req.body;
@@ -16,6 +26,22 @@ exports.register = async (req, res) => {
 
         return res.status(201).json({ meaasge: 'User registered successfully', success: "yes", data: newUser});
 
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
+}
+
+exports.login = async(req, res) => {
+    try{
+        let {email, password} = req.body;
+        const userExist = await User.findOne({email});
+
+        if(userExist && await bcryptjs.compare(password,userExist.password)){
+            return res.json({ message: 'Logged in successfully', success: "true", userExist });
+        }else{
+            return res.status(400).json({ error: 'Invalid credentials' });
+        }     
     }catch(err){
         console.error(err);
         res.status(500).json({ error: 'server error',message:err.message });
