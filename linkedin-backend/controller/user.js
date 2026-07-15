@@ -90,7 +90,12 @@ exports.updateUser = async(req, res) => {
             return res.status(400).json({ error: 'User not found' });
         }
         const updateData = await User.findByIdAndUpdate(isExist._id, user);
-        console.log(updateData);
+        
+        const userData = await User.findById(req.user._id);
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: userData
+        })
 
     }catch(err){
         console.error(err);
