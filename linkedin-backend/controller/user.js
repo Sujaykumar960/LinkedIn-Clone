@@ -81,3 +81,20 @@ exports.login = async(req, res) => {
         res.status(500).json({ error: 'server error',message:err.message });
     }
 }
+
+exports.updateUser = async(req, res) => {
+    try{
+        const { user } = req.body;
+        const isExist = await User.findById(req.user._id);
+        if(!isExist) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        const updateData = await User.findByIdAndUpdate(isExist._id, user);
+        console.log(updateData);
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
+
+}
