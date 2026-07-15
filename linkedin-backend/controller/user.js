@@ -90,7 +90,7 @@ exports.updateUser = async(req, res) => {
             return res.status(400).json({ error: 'User not found' });
         }
         const updateData = await User.findByIdAndUpdate(isExist._id, user);
-        
+
         const userData = await User.findById(req.user._id);
         res.status(200).json({
             message: 'User updated successfully',
@@ -101,5 +101,22 @@ exports.updateUser = async(req, res) => {
         console.error(err);
         res.status(500).json({ error: 'server error',message:err.message });
     }
+}
 
+exports.getProfileById = async(req, res) => {
+    try{
+        const { id } = req.params;
+        const isExist = await User.findById(id);
+        if(!isExist) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        return res.status(200).json({
+            message: 'User fetched successfully',
+            user: isExist
+        });
+        
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
 }
