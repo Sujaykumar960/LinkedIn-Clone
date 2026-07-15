@@ -120,3 +120,13 @@ exports.getProfileById = async(req, res) => {
         res.status(500).json({ error: 'server error',message:err.message });
     }
 }
+
+
+exports.logout = async(req, res) => {
+    try{
+        res.clearCookie('token', cookieOptions).json({ message: 'Logged out successfully'});
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
+}
