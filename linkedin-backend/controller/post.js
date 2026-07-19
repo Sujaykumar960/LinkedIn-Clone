@@ -22,3 +22,18 @@ exports.addPost = async(req, res) => {
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
+exports.likeDislikePost = async(req, res) => {
+    try{
+        let selfId = req.user._id;
+        let { postId } = req.body;
+        let post = await PostModel.findById(postId);
+        if(!post){
+            return res.status(400).json({ message: 'Post not found' });
+        }
+        const index = 
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
