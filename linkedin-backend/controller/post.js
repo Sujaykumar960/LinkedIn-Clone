@@ -54,10 +54,55 @@ exports.likeDislikePost = async(req, res) => {
 
 exports.getAllPost = async(req, res) => {
     try{
-        let posts = (await PostModel.find()).toSorted({ createdAt: -1 });
-        res.status(200).json({ 
+        let posts = await PostModel.find().sort({ createdAt: -1 }).populate("user","-password");
+        return res.status(200).json({ 
             message: 'Posts fetched successfully',
             posts
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+exports.getPostById = async(req, res) => {
+    try{
+        const {postId} = req.params;
+        const post = await PostModel.findById(postId).populate("user","-password");
+        if(!post){
+            return res.status(400).json({ message: 'Post not found' });
+        }
+        return res.status(200).json({ 
+            message: 'Data fetched successfully',
+            post: post
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+exports.getTop5PostForUser = async(req, res) => {
+    try{
+        const {userId} = req.params;
+        const posts = await PostModel.find({ user: userId }).sort({ createdAt: -1 }).limit(5).populate("user","-password");
+        return res.status(200).json({ 
+            message: 'Data fetched successfully',
+            posts: posts
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+exports.getAllPostForUser = async(req, res) => {
+    try{
+        const {userId} = req.params;
+        const posts = await PostModel.find({ user: userId }).sort({ createdAt: -1 }).populate("user","-password");
+        return res.status(200).json({ 
+            message: 'Data fetched successfully',
+            posts: posts
         });
     } catch (error) {
         console.log(error);
