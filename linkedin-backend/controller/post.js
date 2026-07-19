@@ -30,8 +30,35 @@ exports.likeDislikePost = async(req, res) => {
         if(!post){
             return res.status(400).json({ message: 'Post not found' });
         }
-        const index = 
+        const index = post.likes.findIndex(id => id.equals(selfId));
+
+        if(index !== -1){
+            // User already liked the post, remove like
+            post.likes.splice(index, 1);
+        } else {
+            // User didn't like the post, add like
+            post.likes.push(selfId);
+        }
         
+        await post.save();
+        return res.status(200).json({ 
+            message: index !== -1 ? 'Post unliked' : 'Post liked',
+            likes: post.likes
+        });
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+    }
+}
+
+exports.getAllPost = async(req, res) => {
+    try{
+        let posts = (await PostModel.find()).toSorted({ createdAt: -1 });
+        res.status(200).json({ 
+            message: 'Posts fetched successfully',
+            posts
+        });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: 'Internal Server Error' });
