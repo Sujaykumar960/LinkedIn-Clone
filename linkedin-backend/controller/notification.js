@@ -6,7 +6,7 @@ const { create } = require('../models/user');
 exports.getNotification = async(req, res) => {
     try{
         let ownId = req.user._id;
-        let notifications = (await NotificationModal.find({ reciever: ownId})).toSorted({ createdAt: -1 }).populate("sender reciever");
+        let notifications = await NotificationModal.find({ reciever: ownId }).sort({ createdAt: -1 }).populate("sender reciever");
         return res.status(200).json({
             message:"Notifications Fetched Successfully",
             notifications:notifications
@@ -26,6 +26,22 @@ exports.updateRead = async(req, res) => {
         }
         return res.status(200).json({
             message: "Read Notification successfully"
+        })
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'Server error',message:err.message });
+    }
+}
+
+
+exports.activeNotify = async(req, res) => {
+    try{
+        let ownId = req.user._id;
+        let notifications = await NotificationModal.find({ receiver:ownId,isRead:false });
+
+        return res.status(200).json({
+            message:"Notifications Number Fetched Successfully",
+            count : notifications.length
         })
     }catch(err){
         console.error(err);
