@@ -6,7 +6,7 @@ const { create } = require('../models/user');
 exports.getNotification = async(req, res) => {
     try{
         let ownId = req.user._id;
-        let notifications = await NotificationModal.find({ reciever: ownId }).sort({ createdAt: -1 }).populate("sender reciever");
+        let notifications = await NotificationModal.find({ receiver: ownId }).sort({ createdAt: -1 }).populate("sender receiver");
         return res.status(200).json({
             message:"Notifications Fetched Successfully",
             notifications:notifications

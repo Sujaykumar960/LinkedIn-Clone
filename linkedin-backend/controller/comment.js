@@ -22,8 +22,10 @@ exports.commentPost = async(req, res) => {
         const populatedComment = await CommentModel.findById(newComment._id).populate('user','f_name headline profilePic');
 
         const content = `${req.user.f_name} has comment on your post`;
-        const notification = new NotificationModal({sender:userId,reciever:postExist.user._id,content,type:'comment',postId:postId.toString()});
+
+        const notification = new NotificationModal({sender:userId,receiver:postExist.user._id,content,type:'comment',postId:postId.toString()});
         await notification.save();
+        
         return res.status(200).json({
             message: "Commented successfully",
             comment: populatedComment
