@@ -38,3 +38,19 @@ exports.commentPost = async(req, res) => {
         res.status(500).json({ error: 'Server error',message:err.message });
     }
 };
+
+exports.getCommentByPostId = async(req, res) => {
+    try{
+        const {postId} = req.params;
+        const isPostExist = await PostModel.findById(postId);
+        if(!isPostExist){
+            return res.status(400).json({ error: 'Not such post not found' });
+        }
+        const comments = (await CommentModel.find({post:postId})).sort({ createdAt: -1})
+
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'Server error',message:err.message });
+    }
+}
