@@ -2,7 +2,6 @@ const CommentModel = require('../models/comment');
 const PostModel = require('../models/post');
 const NotificationModal = require('../models/notification');
 
-
 exports.commentPost = async(req, res) => {
     try{
         const {postId, comment} = req.body;
@@ -30,9 +29,6 @@ exports.commentPost = async(req, res) => {
             message: "Commented successfully",
             comment: populatedComment
         })
-
-
-
     }catch(err){
         console.error(err);
         res.status(500).json({ error: 'Server error',message:err.message });
@@ -46,9 +42,12 @@ exports.getCommentByPostId = async(req, res) => {
         if(!isPostExist){
             return res.status(400).json({ error: 'Not such post not found' });
         }
-        const comments = (await CommentModel.find({post:postId})).sort({ createdAt: -1})
+        const comments = await CommentModel.find({post:postId}).sort({ createdAt: -1 }).populate('user','f_name headline profilePic');
 
-
+        return res.status(201).json({
+            message:"Comments fetched",
+            comments:comments
+        })
     }catch(err){
         console.error(err);
         res.status(500).json({ error: 'Server error',message:err.message });

@@ -17,4 +17,7 @@ router.get('/self', Authentication.auth, (req, res) => {
     })
 })
 
+router.get("/findUser", Authentication.auth,UserController.findUser)
+router.post('/sendFriendReq', Authentication.auth, UserController.sendFriendRequest)
+
 module.exports = router;
