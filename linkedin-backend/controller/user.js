@@ -199,3 +199,18 @@ exports.sendFriendRequest = async(req, res) => {
         res.status(500).json({ error: 'server error',message:err.message });
     }
 }
+
+exports.acceptFriendRequest = async(req, res) => {
+    try{
+        let { friendId } = req.body;
+        let selfId = req.user._id;
+
+        const
+
+
+
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ error: 'server error',message:err.message });
+    }
+}
