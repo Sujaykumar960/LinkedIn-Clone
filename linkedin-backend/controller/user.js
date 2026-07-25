@@ -297,9 +297,20 @@ exports.removeFromFriend = async(req, res) => {
             });
         };
 
+        if(friendIndex !== -1){
+            friendData.friends.splice(friendIndex, 1);
+        } else {
+            return res.status(400).json({
+                error: "No any request from such user"
+            });
+        }
 
+        await req.user.save();
+        await friendData.save();
 
-
+        return res.status(200).json({
+            message: "You Both Are Disconnected Now."
+        });
 
     }catch(err){
         console.error(err);
