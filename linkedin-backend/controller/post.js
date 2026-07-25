@@ -7,10 +7,6 @@ exports.addPost = async(req, res) => {
         let userId = req.user._id;
 
         const addPost = new PostModel({ user: userId, desc, imageLink });
-
-        if(!addPost){
-            return res.status(400).json({ message: 'Failed to create post' });
-        }
         await addPost.save();
         return res.status(200).json({ 
             message: 'Post created successfully',
@@ -33,10 +29,8 @@ exports.likeDislikePost = async(req, res) => {
         const index = post.likes.findIndex(id => id.equals(selfId));
 
         if(index !== -1){
-            // User already liked the post, remove like
             post.likes.splice(index, 1);
         } else {
-            // User didn't like the post, add like
             post.likes.push(selfId);
         }
         
@@ -45,7 +39,6 @@ exports.likeDislikePost = async(req, res) => {
             message: index !== -1 ? 'Post unliked' : 'Post liked',
             likes: post.likes
         });
-        
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: 'Internal Server Error' });

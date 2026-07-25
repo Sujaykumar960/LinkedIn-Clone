@@ -1,7 +1,4 @@
-
 const NotificationModal = require('../models/notification');
-const { create } = require('../models/user');
-
 
 exports.getNotification = async(req, res) => {
     try{
@@ -32,7 +29,6 @@ exports.updateRead = async(req, res) => {
         res.status(500).json({ error: 'Server error',message:err.message });
     }
 }
-
 
 exports.activeNotify = async(req, res) => {
     try{
