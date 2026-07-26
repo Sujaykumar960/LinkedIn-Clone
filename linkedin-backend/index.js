@@ -15,12 +15,16 @@ const PostRoutes = require('./routes/post');
 const NotificationRoutes = require('./routes/notification');
 const CommentRoutes = require('./routes/comment');
 const ConversationRoutes = require('./routes/conversations');
+const MessageRoutes = require('./routes/message');
+
 
 app.use('/api/users', UserRoutes);
 app.use('/api/post', PostRoutes);
 app.use('/api/notification', NotificationRoutes);
 app.use('/api/comment', CommentRoutes);
 app.use('/api/conversation', ConversationRoutes);
+app.use('/api/message', MessageRoutes);
+
 
 app.listen(PORT, () => {
     console.log("Backend Server is running on port", PORT)
