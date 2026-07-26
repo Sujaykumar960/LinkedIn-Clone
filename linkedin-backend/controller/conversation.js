@@ -1,5 +1,6 @@
 const ConversationModal = require('../models/conversation');
 const MessageModal = require('../models/message');
+const { create } = require('../models/user');
 
 
 
@@ -33,4 +34,19 @@ exports.addConversation = async(req,res) => {
     }
 }
 
-exports
+exports.getConversation = async(req, res) => {
+    try{
+        let loggedinId = req.user._id;
+        let conversations = await ConversationModal.find({
+            members: { $in: [loggedinId] }
+        }).populate("members", "-password").sort({ createdAt: -1 });
+        return res.status(200).json({
+            message: "Fetched Successfully",
+            conversations: conversations
+        });
+
+    } catch(err){
+        console.log(err);
+        return res.status(500).json({ error: 'Server error', message: err.message });
+    }
+}
