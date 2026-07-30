@@ -22,6 +22,10 @@ import axios from 'axios';
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
+  const changeloginValue = (val) => {
+    setIsLogin(val);
+  } 
+
   // const fetchData = async() => {
   //   await axios.post('http://localhost:4000/api/users/login', {email: "", password: ""}).then(res=>{
   //     console.log(res);
