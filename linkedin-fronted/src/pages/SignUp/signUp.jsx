@@ -1,8 +1,15 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import GoogleLoginComp from '../../components/GoogleLogin/googleLoginComp';
 
 const signUp = () => {
+
+    const [registerField, setRegisterField] = useState({email: "", password: "", f_name: ""});
+
+    const handleInputField = (event,key) => {
+        setRegisterField({...registerField, [key]: event.target.value})
+    }
+    
   return (
     <div className='w-full flex flex-col items-center justify-center'>
         <div className='text-4xl mb-5'>Make the most of your professional life</div>
@@ -11,7 +18,7 @@ const signUp = () => {
             <div className='flex flex-col gap-4'>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input type="text" className='w-full text-xl border-2 rounded-lg px-5 py-1' placeholder='Email' />
+                    <input value={registerField.email} onChange={(e) => handleInputField(e,'email')} type="text" className='w-full text-xl border-2 rounded-lg px-5 py-1' placeholder='Email' />
                 </div>
 
                 <div>

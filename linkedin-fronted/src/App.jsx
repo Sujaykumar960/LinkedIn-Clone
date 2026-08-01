@@ -4,7 +4,7 @@ import heroImg from './assets/hero.png'
 import Navbar1 from './components/NavbarV1/navbar1'
 import LandingPage from './pages/LandingPage/landingPage'
 import Footer from './components/Footer/footer'
-import {Routes, Route, UNSAFE_getTurboStreamSingleFetchDataStrategy} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import SignUp from './pages/SignUp/signUp'
 import Login from './pages/Login/login'
 import Navbar2 from './components/Navbar2/navbar2'
@@ -20,19 +20,13 @@ import Notification from './pages/Notification/notification'
 import axios from 'axios';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
 
   const changeloginValue = (val) => {
     setIsLogin(val);
   } 
 
-  // const fetchData = async() => {
-  //   await axios.post('http://localhost:4000/api/users/login', {email: "", password: ""}).then(res=>{
-  //     console.log(res);
-  //   }).catch(err=>{
-  //     console.log(err);
-  //   })
-  // }
+  
 
   // useEffect(()=>{
   //   fetchData();
@@ -44,16 +38,28 @@ function App() {
     <div className='bg-gray-100 w-full h-full box-border'>
       {isLogin?<Navbar2 /> : <Navbar1 />}
       <Routes>
-        <Route path='/' element={<LandingPage />} />
-        <Route path='/signUp' element={<SignUp />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/' element={isLogin? <Navigate to='/feeds' /> : <LandingPage />} />
+
+        <Route path='/signUp' element={isLogin? <Navigate to='/feeds' /> : <SignUp />} />
+
+        <Route path='/login' element={isLogin? <Navigate to='/feeds' /> : <Login changeloginValue={changeloginValue} />} />
+
         <Route path='/feeds' element={<Feeds />} />
+
         <Route path='/myNetwork' element={<MyNetwork />} />
+        
         <Route path='/resume' element={<Resume />} />
+        
         <Route path='/messages' element={<Messages />} />
+        
         <Route path='/notification' element={<Notification />} />
+
+
+        
         <Route path='/profile/:id' element={<Profile />} />
+        
         <Route path='/profile/:id/activities' element={<AllActivities />} />
+
         <Route path='/profile/:id/activities/:postId' element={<SingleActivity />} />
         
 
