@@ -44,23 +44,23 @@ function App() {
 
         <Route path='/login' element={isLogin? <Navigate to='/feeds' /> : <Login changeloginValue={changeloginValue} />} />
 
-        <Route path='/feeds' element={<Feeds />} />
+        <Route path='/feeds' element={isLogin? <Feeds /> : <Navigate to='/login' />} />
 
-        <Route path='/myNetwork' element={<MyNetwork />} />
+        <Route path='/myNetwork' element={isLogin? <MyNetwork /> : <Navigate to='/login' />} />
         
-        <Route path='/resume' element={<Resume />} />
+        <Route path='/resume' element={isLogin? <Resume /> : <Navigate to='/login' />} />
         
-        <Route path='/messages' element={<Messages />} />
+        <Route path='/messages' element={isLogin? <Messages /> : <Navigate to='/login' />} />
         
-        <Route path='/notification' element={<Notification />} />
+        <Route path='/notification' element={isLogin? <Notification /> : <Navigate to='/login' />} />
 
 
         
-        <Route path='/profile/:id' element={<Profile />} />
+        <Route path='/profile/:id' element={isLogin? <Profile /> : <Navigate to='/login' />} />
         
-        <Route path='/profile/:id/activities' element={<AllActivities />} />
+        <Route path='/profile/:id/activities' element={isLogin? <AllActivities /> : <Navigate to='/login' />} />
 
-        <Route path='/profile/:id/activities/:postId' element={<SingleActivity />} />
+        <Route path='/profile/:id/activities/:postId' element={isLogin? <SingleActivity /> : <Navigate to='/login' />} />
         
 
 

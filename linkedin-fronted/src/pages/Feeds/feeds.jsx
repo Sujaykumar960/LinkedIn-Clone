@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Card from '../../components/Card/card'
 import ProfileCard from '../../components/ProfileCard/profileCard'
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
@@ -9,10 +9,46 @@ import Post from '../../components/Post/post'
 import Modal from '../../components/Modal/modal';
 import AddModal from '../../components/AddModal/addModal';
 import Loader from '../../components/Loader/loader';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Feeds = () => {
+
+  const [personalData, setPersonalData] = useState(null);
+  const [post, setPost] = useState([]);
   
   const [addPostModal, setAddPostModal] = React.useState(false);
+
+  // const fetchSelfData = async() => {
+  //   await axios.get('http://localhost:4000/api/users/self',{withCredentials:true}).then(res => {
+  //     setPersonalData(res.data.user);
+  //   }).catch(err => {
+  //     console.error('API error:', err);
+  //     toast.error(err?.response?.data?.error);
+  //   })
+  // }
+
+  const fetchData = async() => {
+    try{
+      const [userData, postData] = await Promise.all([
+        await axios.get('http://localhost:4000/api/users/self',{withCredentials:true}),
+        await axios.get('http://localhost:4000/api/post/getAllPost')
+      ]);
+
+      setPersonalData(userData.data.user);
+      localStorage.setItem('userInfo', JSON.stringify(userData.data.user));
+      setPost(postData.data.posts);
+      
+    }catch(err){
+      console.log(err);
+      toast.error(err?.response?.data?.error);
+    }
+  }
+
+  useEffect(() => {
+    // fetchSelfData();
+    fetchData();
+  }, [])
 
   const handleOpenPostModal = () => {
     setAddPostModal(prev=>!prev);
@@ -22,7 +58,7 @@ const Feeds = () => {
       {/* left side bar */}
       <div className='w-[21%] sm:block sm:w-[23%] hidden py-5'>
         <div className='h-fit'>
-          <ProfileCard />
+          <ProfileCard data={personalData}/>
         </div>
 
         <div className='w-full my-5'>
@@ -61,9 +97,13 @@ const Feeds = () => {
         <div className='border-b-1 border-gray-400 w-[100%] my-5' /> 
 
         <div className='w-full flex flex-col gap-5'>
-          <Post />
-
-          <Post />
+         
+        {
+          post.map((item, index) => {
+            return <Post />;
+          })
+        }
+          
         </div>
 
       </div>
@@ -95,6 +135,7 @@ const Feeds = () => {
           <AddModal />
         </Modal>
       }
+      <ToastContainer />
 
     </div>
   )
