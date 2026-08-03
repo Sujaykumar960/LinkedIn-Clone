@@ -16,7 +16,7 @@ const Post = ({ profile,item,personalData }) => {
   };
   console.log(item);
 
-  const desc = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus.`;
+  const desc = item?.desc
   return (
     <Card padding={0} className="w-full">
       <div className="flex gap-3 p-4">
@@ -29,17 +29,11 @@ const Post = ({ profile,item,personalData }) => {
         </div>
       </div>
 
-      <div className="text-md p-4 my-3 whitespace-pre-line flex-grow">
-        {seeMore ? desc : desc.slice(0, 50) + "..."}{" "}
-        <span
-          onClick={() => setSeeMore((prev) => !prev)}
-          className="cursor-pointer text-gray-500"
-        >
-          {seeMore ? "see less" : "see more"}
-        </span>
+      <div className="text-md p-4 my-3 whitespace-pre-line flex-grow"> 
+        {seeMore ? desc : desc.slice(0, 50) + "..."}{" "} {desc.length<100?null:<span onClick={() => setSeeMore((prev) => !prev)} className="cursor-pointer text-gray-500" > {seeMore ? "see less" : "see more"} </span>}
       </div>
 
-      <div className="w-[100%] h-[100%]">
+      <div className="w-full h-full">
         <img src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" className="w-full" />
       </div>
 
