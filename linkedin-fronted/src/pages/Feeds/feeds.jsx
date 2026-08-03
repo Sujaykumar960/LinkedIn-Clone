@@ -100,7 +100,7 @@ const Feeds = () => {
          
         {
           post.map((item, index) => {
-            return <Post />;
+            return <Post item={item} key={index} personalData={personalData} />;
           })
         }
           

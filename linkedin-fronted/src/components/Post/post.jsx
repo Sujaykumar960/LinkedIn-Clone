@@ -7,28 +7,25 @@ import CommentIcon from "@mui/icons-material/Comment";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import SendIcon from "@mui/icons-material/Send";
 
-const Post = ({profile}) => {
+const Post = ({ profile,item,personalData }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [comment, setComment] = useState(false);
 
   const handleSendComment = (e) => {
     e.preventDefault();
   };
+  console.log(item);
 
   const desc = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus, voluptate. Voluptas, voluptate! Doloribus.`;
   return (
     <Card padding={0} className="w-full">
       <div className="flex gap-3 p-4">
         <div className="w-12 h-12 rounded-4xl">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s"
-            alt=""
-            className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer"
-          />
+          <img src={item?.user?.profilePic} alt="" className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer" />
         </div>
         <div>
-          <div className="text-lg font-semibold">Dummy User</div>
-          <div className="text-xs text-gray-500">SDE-II Eng. @Amazon</div>
+          <div className="text-lg font-semibold">{item?.user?.f_name}</div>
+          <div className="text-xs text-gray-500">{item?.user?.headline}</div>
         </div>
       </div>
 
