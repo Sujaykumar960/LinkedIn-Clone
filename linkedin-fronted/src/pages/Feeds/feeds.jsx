@@ -82,7 +82,7 @@ const Feeds = () => {
         <div>
           <Card padding={1}>
             <div className='flex gap-2 items-center'>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" className='rounded-4xl w-13 h-13 border-2 border-white cursor-pointer'/>
+              <img src={personalData?.profilePic} alt="" className='rounded-4xl w-13 h-13 border-2 border-white cursor-pointer'/>
               <div onClick={()=>setAddPostModal(true)} className='w-full border-1 py-3 px-3 rounded-3xl cursor-pointer hover:bg-gray-100'> Start a Post </div>
             </div>
 
@@ -132,7 +132,7 @@ const Feeds = () => {
 
       {
         addPostModal && <Modal closeModal={handleOpenPostModal} title={""}>
-          <AddModal />
+          <AddModal personalData={personalData} />
         </Modal>
       }
       <ToastContainer />

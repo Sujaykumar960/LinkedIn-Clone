@@ -43,7 +43,7 @@ const Post = ({ profile,item,personalData }) => {
           <div className="text-sm text-gray-600">{item?.likes.length} Like</div>
         </div>
         <div className="flex gap-1 items-center">
-          <div className="text-sm text-gray-600">2 Comments</div>
+          <div className="text-sm text-gray-600">{item?.comments} Comments</div>
         </div>
       </div>
 
