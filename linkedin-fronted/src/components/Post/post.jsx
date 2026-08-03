@@ -29,18 +29,18 @@ const Post = ({ profile,item,personalData }) => {
         </div>
       </div>
 
-      <div className="text-md p-4 my-3 whitespace-pre-line flex-grow"> 
+      <div className="text-md p-4 my-3 whitespace-pre-line grow"> 
         {seeMore ? desc : desc.slice(0, 50) + "..."}{" "} {desc.length<100?null:<span onClick={() => setSeeMore((prev) => !prev)} className="cursor-pointer text-gray-500" > {seeMore ? "see less" : "see more"} </span>}
       </div>
 
       <div className="w-full h-full">
-        <img src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" className="w-full" />
+        <img src={item?.imageLink} alt="" className="w-full h-full" />
       </div>
 
       <div className="my-2 p-4 flex justify-between items-center">
         <div className="flex gap-1 items-center">
           <ThumbUpIcon sx={{ color: "blue", fontSize: 20 }} />{" "}
-          <div className="text-sm text-gray-600">1 Like</div>
+          <div className="text-sm text-gray-600">{item?.likes.length} Like</div>
         </div>
         <div className="flex gap-1 items-center">
           <div className="text-sm text-gray-600">2 Comments</div>
