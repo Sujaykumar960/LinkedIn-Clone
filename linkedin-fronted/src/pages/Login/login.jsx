@@ -33,7 +33,7 @@ const Login = (props) => {
         <div className='w-[85%] md:w-[28%] shadow-xl rounded-sm box p-10'>
             <div className='text-3xl'>Sign In</div>
             <div className='my-5'>
-                <GoogleLoginComp />
+                <GoogleLoginComp changeloginValue={props.changeloginValue} />
             </div>
 
             <div className='flex items-center gap-2'>

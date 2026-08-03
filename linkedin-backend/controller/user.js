@@ -22,7 +22,7 @@ exports.loginThroughGmail = async(req, res) => {
 
         const {sub, email, name, picture} = payload;
 
-        const userExist = await User.findOne({email});
+        let userExist = await User.findOne({email});
         if(!userExist){
             // Register New User
             userExist = await User.create({

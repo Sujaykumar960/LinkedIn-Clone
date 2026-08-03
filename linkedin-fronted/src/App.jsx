@@ -38,9 +38,9 @@ function App() {
     <div className='bg-gray-100 w-full h-full box-border'>
       {isLogin?<Navbar2 /> : <Navbar1 />}
       <Routes>
-        <Route path='/' element={isLogin? <Navigate to='/feeds' /> : <LandingPage />} />
+        <Route path='/' element={isLogin? <Navigate to='/feeds' /> : <LandingPage changeloginValue={changeloginValue}/>} />
 
-        <Route path='/signUp' element={isLogin? <Navigate to='/feeds' /> : <SignUp />} />
+        <Route path='/signUp' element={isLogin? <Navigate to='/feeds' /> : <SignUp changeloginValue={changeloginValue}/>} />
 
         <Route path='/login' element={isLogin? <Navigate to='/feeds' /> : <Login changeloginValue={changeloginValue} />} />
 
