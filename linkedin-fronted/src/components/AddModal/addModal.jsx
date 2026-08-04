@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
 import ImageIcon from '@mui/icons-material/Image';
 import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios';
 
 const AddModal = (props) => {
 
-  const [ImageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
   const [desc, setDesc] = useState("");
 
   // cloudname = qzt1h0ia
   // presetName = linkedinClone
 
   const handlePost = async() => {
-    if(desc.trim().length===0 & !ImageUrl) return toast.error("Please enter any field");
+    if(desc.trim().length===0 & !imageUrl) return toast.error("Please enter any field");
+
+    await axios.post('http://localhost:4000/api/post',{desc:desc,imageLink:imageUrl},{withCredentials:true}).then((res => {
+      window.location.reload();
+    })).catch(err => {
+      console.log(err);
+    })
   } 
 
   const handleUploadImage = async(e) => {
@@ -23,6 +30,8 @@ const AddModal = (props) => {
     try{
       const response = await axios.post("https://api.cloudinary.com/v1_1/qzt1h0ia/image/upload", data)
 
+      const ImageUrl = response.data.url;
+      setImageUrl(ImageUrl);
 
     } catch(err){
       console.log(err);
@@ -43,8 +52,8 @@ const AddModal = (props) => {
           <textarea value={desc} onChange={(e)=>setDesc(e.target.value)} cols={50} rows={5} name="" id="" placeholder="What do you want to talk about?" className='my-3 outline-0 text-xl p-2'></textarea>
         </div>
         {
-          ImageUrl && <div>
-            <img src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" className='w-20 h-20 rounded-xl'/>
+          imageUrl && <div>
+            <img src={imageUrl} alt="" className='w-20 h-20 rounded-xl'/>
           </div>
         }
         
