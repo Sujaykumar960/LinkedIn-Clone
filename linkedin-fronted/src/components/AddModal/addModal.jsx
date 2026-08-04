@@ -7,9 +7,28 @@ const AddModal = (props) => {
   const [ImageUrl, setImageUrl] = useState(null);
   const [desc, setDesc] = useState("");
 
+  // cloudname = qzt1h0ia
+  // presetName = linkedinClone
+
   const handlePost = async() => {
     if(desc.trim().length===0 & !ImageUrl) return toast.error("Please enter any field");
   } 
+
+  const handleUploadImage = async(e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file',files[0]);
+
+    data.append('upload_preset', 'linkedinClone');
+    try{
+      const response = await axios.post("https://api.cloudinary.com/v1_1/qzt1h0ia/image/upload", data)
+
+
+    } catch(err){
+      console.log(err);
+    }
+    
+  }
 
   return (
     <div className=''>
@@ -32,7 +51,7 @@ const AddModal = (props) => {
         <div className='flex justify-between items-center'>
           <div className='my-6'>
             <label className='cursor-pointer' htmlFor="inputFile"> <ImageIcon /> </label>
-            <input type="file" className='hidden' id="inputFile"/>
+            <input onChange={handleUploadImage} type="file" className='hidden' id="inputFile"/>
           </div>
           <div className='bg-blue-950 text-white py-1 px-3 cursor-pointer rounded-2xl h-fit' onClick={handlePost}>Post</div>
         </div>
