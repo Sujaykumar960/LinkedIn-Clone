@@ -53,7 +53,10 @@ const Post = ({ profile,item,personalData }) => {
         <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
           <ThumbUpIcon sx={{ fontSize: 22, color: "blue" }} />{" "}
           <span>Like</span>{" "}
-       
+        </div>
+        <div onClick={() => setComment(true)} className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
+          <CommentIcon sx={{ fontSize: 22 }} /> <span>Comment</span>{" "}
+        </div>
         <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
           <SendIcon sx={{ fontSize: 22 }} /> <span>Share</span>{" "}
         </div>
