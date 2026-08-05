@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
     },
     cover_pic: {
         type: String,
-        default: "https://new.wizkidsclub.com/wp-content/uploads/2020/07/default-cover.jpg"
+        default: "https://template.canva.com/EAGW1jzyXdM/1/0/1600w-z3gR0R_Vwes.jpg"
     },
     about: {
         type: String,
