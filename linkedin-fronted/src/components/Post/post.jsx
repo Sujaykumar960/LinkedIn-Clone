@@ -11,6 +11,9 @@ const Post = ({ profile,item,personalData }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [comment, setComment] = useState(false);
 
+  const [liked,setLiked] = useState(false);
+  const [noOfLikes,setNoOfLikes] = useState(item?.likes.length);
+
   const handleSendComment = (e) => {
     e.preventDefault();
   };
@@ -49,7 +52,7 @@ const Post = ({ profile,item,personalData }) => {
       <div className="my-2 p-4 flex justify-between items-center">
         <div className="flex gap-1 items-center">
           <ThumbUpIcon sx={{ color: "blue", fontSize: 20 }} />{" "}
-          <div className="text-sm text-gray-600">{item?.likes.length} Like</div>
+          <div className="text-sm text-gray-600">{noOfLikes} Like</div>
         </div>
         <div className="flex gap-1 items-center">
           <div className="text-sm text-gray-600">{item?.comments} Comments</div>
