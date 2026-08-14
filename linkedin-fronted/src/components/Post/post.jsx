@@ -6,6 +6,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import axios from 'axios';
+import { ToastContainer,toast} from 'react-toastify'
 
 const Post = ({ profile, item, personalData }) => {
   const [seeMore, setSeeMore] = useState(false);
@@ -17,21 +18,17 @@ const Post = ({ profile, item, personalData }) => {
   const [liked, setLiked] = useState(false);
   const [noOfLikes, setNoOfLikes] = useState(item?.likes?.length || 0);
 
-  const handleSendComment = async (e) => {
+
+  const handleSendComment = async(e) => {
     e.preventDefault();
-    if (!commentText.trim()) return;
-    try {
-      const response = await axios.post(
-        'http://localhost:4000/api/comment',
-        { postId: item?._id, comment: commentText },
-        { withCredentials: true }
-      );
-      setComments((prev) => [response.data.comment, ...prev]);
-      setCommentText('');
-    } catch (err) {
+    if (commentText.trim().length===0) return toast.error('Comment cannot be empty');
+
+    await axios.post(`http://localhost:4000/api/comment`,{postId: item?._id,comment: commentText},{withCredentials:true}).then((res)=>{
+      setComments([res.data.comment, ...comments]);
+    }).catch ((err) => {
       console.log(err);
       alert('Failed to send comment');
-    }
+    });
   };
 
   useEffect(() => {
@@ -134,7 +131,7 @@ const Post = ({ profile, item, personalData }) => {
           <div className="flex gap-2 items-center">
             <img src={personalData?.profilePic} alt="" className="rounded-full w-10 h-10 border-2 border-white cursor-pointer" />
             <form action="" className="w-full flex gap-2" onSubmit={handleSendComment} >
-              <input type="text" placeholder="Add a comment..." value={commentText} onChange={(e) => setCommentText(e.target.value)} className="w-full border-1 py-3 px-5 rounded-3xl hover:bg-gray-100" />
+              <input value={commentText} onChange={(event)=>setCommentText(event.target.value)} type="text" placeholder="Add a comment..." className="w-full border py-3 px-5 rounded-3xl hover:bg-gray-100" />
               <button type="submit" className="cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3"> Send </button>
             </form>
           </div>
@@ -164,6 +161,7 @@ const Post = ({ profile, item, personalData }) => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </Card>
   );
 };
