@@ -173,7 +173,13 @@ const Profile = () => {
                   <div className={clsx('overflow-x-auto', 'my-2', 'flex', 'gap-1', 'overflow-y-hidden', 'w-full')}>
 
                     {
-                      
+                      postData.map((item,index)=>{
+                        return(
+                          <Link key={index} to={`/profile/${id}/activities/${item._id}`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
+                            <Post profile={1} item={item} personalData={ownData}/>
+                          </Link>
+                        );
+                      })
                     }
 
                   </div>

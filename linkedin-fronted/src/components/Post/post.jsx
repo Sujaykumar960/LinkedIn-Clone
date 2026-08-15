@@ -8,7 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import axios from 'axios';
 import { ToastContainer,toast} from 'react-toastify'
 
-const Post = ({ profile, item, personalData }) => {
+const Post = ({ profile, item, key, personalData }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [comment, setComment] = useState(false);
 
@@ -69,9 +69,10 @@ const Post = ({ profile, item, personalData }) => {
   }
 
   const desc = item?.desc
+
   return (
-    <Card padding={0} className="w-full">
-      <div className="flex gap-3 p-4">
+    <Card padding={0} className={`${profile ? 'h-full' : ''} w-full flex flex-col`}>
+      <div className="flex gap-3 p-4 flex-shrink-0">
         <div className="w-12 h-12 rounded-4xl">
           <img src={item?.user?.profilePic} alt="" className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer" />
         </div>
@@ -83,22 +84,30 @@ const Post = ({ profile, item, personalData }) => {
 
       {
         desc?.length > 0 && (
-          <div className="text-md p-4 my-3 whitespace-pre-line grow">
-            {seeMore ? desc : desc.slice(0, 50) + "..."}{" "} {desc?.length > 50 && <span onClick={() => setSeeMore((prev) => !prev)} className="cursor-pointer text-gray-500" > {seeMore ? "see less" : "see more"} </span>}
+          <div className="text-md p-4 my-3 whitespace-pre-line">
+            {seeMore ? desc : desc.slice(0, 50) + "..."}{" "}
+            {desc?.length > 50 && (
+              <span
+                onClick={() => setSeeMore((prev) => !prev)}
+                className="cursor-pointer text-gray-500"
+              >
+                {seeMore ? "see less" : "see more"}
+              </span>
+            )}
           </div>
         )
       }
 
       {
         item?.imageLink && (
-          <div className="w-full h-full">
-            <img src={item?.imageLink} alt="" className="w-full h-full" />
+          <div className="w-full max-h-[300px] overflow-hidden">
+            <img src={item?.imageLink} alt="" className="w-full h-full object-cover" />
           </div>
         )
       }
 
 
-      <div className="my-2 p-4 flex justify-between items-center">
+      <div className="my-2 p-4 flex justify-between items-center mt-auto">
         <div className="flex gap-1 items-center">
           <ThumbUpIcon sx={{ color: "blue", fontSize: 20 }} />{" "}
           <div className="text-sm text-gray-600">{noOfLikes} Like</div>
@@ -115,9 +124,11 @@ const Post = ({ profile, item, personalData }) => {
               {liked ? <ThumbUpIcon sx={{ fontSize: 22, color: "blue" }} /> : <ThumbUpOffAltIcon sx={{ fontSize: 22 }} />}
               <span>{liked ? 'Liked' : 'Like'}</span>{" "}
             </div>
+
             <div onClick={handleCommentBoxOpenClose} className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
               <CommentIcon sx={{ fontSize: 22 }} /> <span>Comment</span>{" "}
             </div>
+
             <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
               <SendIcon sx={{ fontSize: 22 }} /> <span>Share</span>{" "}
             </div>
@@ -130,9 +141,19 @@ const Post = ({ profile, item, personalData }) => {
         <div className="p-4 w-full">
           <div className="flex gap-2 items-center">
             <img src={personalData?.profilePic} alt="" className="rounded-full w-10 h-10 border-2 border-white cursor-pointer" />
-            <form action="" className="w-full flex gap-2" onSubmit={handleSendComment} >
-              <input value={commentText} onChange={(event)=>setCommentText(event.target.value)} type="text" placeholder="Add a comment..." className="w-full border py-3 px-5 rounded-3xl hover:bg-gray-100" />
-              <button type="submit" className="cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3"> Send </button>
+
+            <form action="" className="w-full flex gap-2" onSubmit={handleSendComment}>
+              <input
+                value={commentText}
+                onChange={(event)=>setCommentText(event.target.value)}
+                type="text"
+                placeholder="Add a comment..."
+                className="w-full border py-3 px-5 rounded-3xl hover:bg-gray-100"
+              />
+
+              <button type="submit" className="cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3">
+                Send
+              </button>
             </form>
           </div>
 
@@ -145,6 +166,7 @@ const Post = ({ profile, item, personalData }) => {
                   <div className="my-4">
                     <div className="flex gap-3">
                       <img src={item?.user?.profilePic} alt="" className="rounded-full w-10 h-10 border-2 border-white cursor-pointer" />
+
                       <div className="cursor-pointer">
                         <div className="text-md">{item?.user?.f_name}</div>
                         <div className="text-sm text-gray-500">{item?.user?.headline}</div>
@@ -161,6 +183,7 @@ const Post = ({ profile, item, personalData }) => {
           </div>
         </div>
       )}
+
       <ToastContainer />
     </Card>
   );
