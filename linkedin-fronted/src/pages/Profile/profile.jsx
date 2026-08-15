@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{ useState,useEffect } from 'react'
 import clsx from 'clsx';
 import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
@@ -13,8 +13,9 @@ import ExpModal from '../../components/ExpModal/expModal';
 import MessageModal from '../../components/MessageModal/messageModal';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import { useParams } from 'react-router-dom';
+
 
 const Profile = () => {
   const {id} = useParams();
@@ -26,6 +27,33 @@ const Profile = () => {
   const [aboutModal, setAboutModal] = useState(false);
   const [expModal, setExpModal] = useState(false);
   const [messageModal, setMessageModal] = useState(false);
+
+  const [userData, setUserData] = useState(null);
+  const [postData, setPostData] = useState([]);
+  const [ownData, setOwnData] = useState(null);
+
+  useEffect(() => {
+    fetchDataOnLoad()
+  }, [])
+
+  const fetchDataOnLoad = async() => {
+    try{
+      const [userDatas,postDatas,ownDatas] = await  Promise.all([
+        axios.get(`http://localhost:4000/api/users/user/${id}`),
+        axios.get(`http://localhost:4000/api/post/getTop5Post/${id}`),
+        axios.get('http://localhost:4000/api/users/self',{withCredentials:true}),
+      ]);
+      
+      setUserData(userDatas.data.user);
+      setPostData(postDatas.data.posts);
+      setOwnData(ownDatas.data.user);
+
+    }catch(err){
+        console.log(err);
+        alert("Something want Wrong");
+    }
+  }
+
 
   const handleMessageModal = () => {
     setMessageModal(prev => !prev);
@@ -68,17 +96,17 @@ const Profile = () => {
                   <div className={clsx('w-full', 'h-fit', 'bg-gray-200')}>
                     <div className={clsx('relative', 'w-full', 'h-[200px]')}>
                       <div className={clsx('absolute', 'cursor-pointer', 'top-3', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleOnEditCover}><EditIcon /></div>
-                      <img className={clsx('w-full', 'h-[200px]', 'rounded-tr-lg', 'rounded-tl-lg')} src="https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=" alt="" />
-                      <div className={clsx('absolute', 'object-cover', 'top-24', 'left-6', 'z-10')} onClick={handleCircularImageOpen}><img className={clsx('rounded-full', 'border-2', 'border-white', 'cursor-pointer', 'w-30', 'h-30')} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" /></div>
+                      <img className={clsx('w-full', 'h-[200px]', 'rounded-tr-lg', 'rounded-tl-lg')} src={userData?.cover_pic} alt="" />
+                      <div className={clsx('absolute', 'object-cover', 'top-24', 'left-6', 'z-10')} onClick={handleCircularImageOpen}><img className={clsx('rounded-full', 'border-2', 'border-white', 'cursor-pointer', 'w-30', 'h-30')} src={userData?.profilePic} alt="" /></div>
                     </div>
 
                     <div className={clsx('mt-10', 'relative', 'px-8', 'py-2')}>
                       <div className={clsx('absolute', 'cursor-pointer', 'top-0', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleInfoModal}><EditIcon /></div>
                       <div className='w-full'>
-                        <div className='text-2xl'>User 1</div>
-                        <div className='text-gray-700'>Software Engineer</div>
-                        <div className={clsx('text-sm', 'text-gray-500')}>Delhi, India</div>
-                        <div className={clsx('text-md', 'text-blue-800', 'w-fit', 'cursor-pointer', 'hover:underline')}>2 connections</div>
+                        <div className='text-2xl'>{userData?.f_name}</div>
+                        <div className='text-gray-700'>{userData?.headline}</div>
+                        <div className={clsx('text-sm', 'text-gray-500')}>{userData?.curr_location}</div>
+                        <div className={clsx('text-md', 'text-blue-800', 'w-fit', 'cursor-pointer', 'hover:underline')}>{userData?.friends?.length}</div>
 
                         <div className={clsx('md:flex', 'w-full', 'justify-between')}>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
@@ -107,7 +135,7 @@ const Profile = () => {
                     <div className='text-xl'>About</div>
                     <div className='cursor-pointer' onClick={handleAboutModal}><EditIcon /></div>
                   </div>
-                  <div className={clsx('text-gray-700', 'text-md', 'w-[80%]')}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum officia iure facere! Eum reprehenderit ad eius quaerat asperiores quo totam et, dolores sit magnam earum aliquid corrupti saepe ab animi?</div>
+                  <div className={clsx('text-gray-700', 'text-md', 'w-[80%]')}>{userData?.about || "No information added yet"}</div>
                 </Card>
               </div>
               
@@ -117,10 +145,18 @@ const Profile = () => {
                     <div className='text-xl'>Skills</div>
                   </div>
                   <div className={clsx('text-gray-700', 'text-md', 'my-2', 'w-full', 'flex', 'gap-4', 'flex-wrap')}>
-                    <div className={clsx('py-1', 'px-2', 'cursor-pointer', 'bg-blue-800', 'text-white', 'rounded-lg')}>React JS</div>
-                    <div className={clsx('py-1', 'px-2', 'cursor-pointer', 'bg-blue-800', 'text-white', 'rounded-lg')}>Node JS</div>
-                    <div className={clsx('py-1', 'px-2', 'cursor-pointer', 'bg-blue-800', 'text-white', 'rounded-lg')}>Express JS</div>
-                    <div className={clsx('py-1', 'px-2', 'cursor-pointer', 'bg-blue-800', 'text-white', 'rounded-lg')}>MongoDB</div>
+                    
+                    {
+                      userData?.skills?.length > 0 ? (
+                        userData?.skills?.map((item,index)=>{
+                          return(
+                            <div key={index} className={clsx('py-1', 'px-2', 'cursor-pointer', 'bg-blue-800', 'text-white', 'rounded-lg')}>{item}</div>
+                          );
+                        })
+                      ) : (
+                        <div className="text-gray-500">No skills added yet</div>
+                      )
+                    }
 
                   </div>
                 </Card>
@@ -136,15 +172,9 @@ const Profile = () => {
                   {/* Parent div for scrollable Activities */}
                   <div className={clsx('overflow-x-auto', 'my-2', 'flex', 'gap-1', 'overflow-y-hidden', 'w-full')}>
 
-                    <Link to={`/profile/${id}/activities/111`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
-                      <Post profile={1}/>
-                    </Link>
-                    <Link to={`/profile/${id}/activities/112`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
-                      <Post profile={1}/>
-                    </Link>
-                    <Link to={`/profile/${id}/activities/113`} className={clsx('cursor-pointer', 'shrink-0', 'w-[350px]', 'h-[560px]')}>
-                      <Post profile={1}/>
-                    </Link>
+                    {
+                      
+                    }
 
                   </div>
 

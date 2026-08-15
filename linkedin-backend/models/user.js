@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema({
     },
     cover_pic: {
         type: String,
-        default: "https://template.canva.com/EAGW1jzyXdM/1/0/1600w-z3gR0R_Vwes.jpg"
+        default: "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=800"
     },
     about: {
         type: String,

@@ -72,7 +72,7 @@ const Navbar2 = () => {
           <div className={`text-sm text-gray-500 ${location.pathname === '/notification' ? 'border-b-3':''}`}>Notifications</div>
         </Link>
 
-        <Link to={`/profile/${userData?.id}`} className="flex flex-col items-center cursor-pointer">
+        <Link to={`/profile/${userData?._id}`} className="flex flex-col items-center cursor-pointer">
           <img className="w-7 h-7 rounded-full" src={userData?.profilePic} alt="" />
           <div className="text-sm text-gray-500">me</div>
         </Link>
