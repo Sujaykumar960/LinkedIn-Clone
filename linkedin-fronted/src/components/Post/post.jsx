@@ -82,9 +82,9 @@ const Post = ({ profile, item, personalData }) => {
       </div>
 
       {
-        desc.length > 0 && (
+        desc?.length > 0 && (
           <div className="text-md p-4 my-3 whitespace-pre-line grow">
-            {seeMore ? desc : desc.slice(0, 50) + "..."}{" "} {desc.length > 50 && <span onClick={() => setSeeMore((prev) => !prev)} className="cursor-pointer text-gray-500" > {seeMore ? "see less" : "see more"} </span>}
+            {seeMore ? desc : desc.slice(0, 50) + "..."}{" "} {desc?.length > 50 && <span onClick={() => setSeeMore((prev) => !prev)} className="cursor-pointer text-gray-500" > {seeMore ? "see less" : "see more"} </span>}
           </div>
         )
       }

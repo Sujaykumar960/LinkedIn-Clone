@@ -1,6 +1,6 @@
 // import React from 'react'
 import linkedinLogo from "../../assets/Linkedin_logo.png";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./navbar2.css";
 import HomeIcon from '@mui/icons-material/Home';
 import GroupIcon from '@mui/icons-material/Group';
@@ -12,6 +12,13 @@ import { Link, useLocation } from "react-router-dom";
 const Navbar2 = () => {
   const [dropdown, setDropDown] = React.useState(false);
   const location = useLocation();
+
+  const[userData,setUserData] = useState(null) 
+  
+  useEffect(() => {
+    let userData = localStorage.getItem('userInfo')
+    setUserData(userData? JSON.parse(userData) : null)
+  },[])
 
   console.log(location)
   return (
@@ -65,8 +72,8 @@ const Navbar2 = () => {
           <div className={`text-sm text-gray-500 ${location.pathname === '/notification' ? 'border-b-3':''}`}>Notifications</div>
         </Link>
 
-        <Link to={`/profile/jghu`} className="flex flex-col items-center cursor-pointer">
-          <img className="w-10 h-10 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s" alt="" />
+        <Link to={`/profile/${userData?.id}`} className="flex flex-col items-center cursor-pointer">
+          <img className="w-7 h-7 rounded-full" src={userData?.profilePic} alt="" />
           <div className="text-sm text-gray-500">me</div>
         </Link>
       </div>

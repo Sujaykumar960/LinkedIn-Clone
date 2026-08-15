@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-  const { id } = useParams();
+  const {id} = useParams();
 
   const [imageSetModal, setImageModal] = useState(false);
   const [circularImage,setCircularImage] = useState(true);
