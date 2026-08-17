@@ -84,6 +84,15 @@ const Profile = () => {
     setImageModal(true);
     setCircularImage(true);
   }
+
+  const handleEditFunc = async(data) => {
+    await axios.put(`http://localhost:4000/api/users/update`,{user:data},{withCredentials:true}).then(res=>{
+      window.location.reload();
+    }).catch ((err) => {
+      console.log(err);
+      alert('Something Went Wrong');
+    });
+  }
   
   return (
     <div className={clsx('px-5', 'xl:px-50', 'py-5', 'mt-5', 'flex', 'flex-col', 'gap-5', 'w-full', 'pt-12', 'bg-gray-100')}>
@@ -238,7 +247,7 @@ const Profile = () => {
 
         {
           imageSetModal && (<Modal title="Upload Image" closeModal={handleImageModalOpenClose}> 
-              <ImageModal isCircular={circularImage}/>
+              <ImageModal selfData={ownData} isCircular={circularImage}/>
             </Modal>
           )
         }
