@@ -94,7 +94,7 @@ const Post = ({ profile, item, key, personalData }) => {
 
       {
         item?.imageLink && (
-          <div className="w-full max-h-[300px] overflow-hidden">
+          <div className="w-full max-h-[500px] overflow-hidden">
             <img src={item?.imageLink} alt="" className="w-full h-full object-cover" />
           </div>
         )
