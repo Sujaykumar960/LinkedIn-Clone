@@ -204,10 +204,10 @@ const Profile = () => {
                         return(
                           <div className={clsx('p-2', 'border-t-1', 'border-gray-300', 'flex', 'justify-between')}>
                             <div>
-                              <div className='text-lg'>DSE Engineer | Full stack Engineer</div>
-                              <div className='text-sm'>Amazon</div>
-                              <div className={clsx('text-sm', 'text-gray-500')}>March 2022, Present</div>
-                              <div className={clsx('text-sm', 'text-gray-500')}>Delhi, India</div>
+                              <div className='text-lg'>{item?.designation}</div>
+                              <div className='text-sm'>{item?.company_name}</div>
+                              <div className={clsx('text-sm', 'text-gray-500')}>{item?.duration}</div>
+                              <div className={clsx('text-sm', 'text-gray-500')}>{item?.location}</div>
                             </div>
                             <div className='cursor-pointer'><EditIcon /></div>
                           </div>
