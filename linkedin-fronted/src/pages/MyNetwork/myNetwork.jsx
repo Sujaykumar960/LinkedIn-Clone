@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
+import axios from 'axios'
 
 const MyNetwork = () => {
 
@@ -11,6 +12,19 @@ const MyNetwork = () => {
 
     const handlePending = async() => {
         setText("Pending Request")
+    }
+
+    const fetchFriendList = async() => {
+        await axios.get('http://localhost:4000/api/users/friendsList',{withCredentials:true}).then((res)=>{
+            console.log(res)
+        }).catch((err)=>{
+            console.log(err)
+            alert("Something Went Wrong")
+        })
+    }
+
+    const fetchPendingRequest = async() => {
+        // Fetch pending request logic
     }
 
     useEffect(() => {
