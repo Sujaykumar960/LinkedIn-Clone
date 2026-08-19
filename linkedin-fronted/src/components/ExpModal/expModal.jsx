@@ -17,7 +17,7 @@ const ExpModal = ({ handleEditFunc, selfData, updateExp, setUpdateExp }) => {
         let newFilteredData = selfData?.experience.filter((item) => item._id !== updateExp?.data?._id);
         let newArr = [...newFilteredData, data];
         let newData = {...selfData, experience: newArr};
-        handleUploadBtn(newData);
+        handleEditFunc(newData);
     }
 
     const handleOnSave = () => {
@@ -25,6 +25,11 @@ const ExpModal = ({ handleEditFunc, selfData, updateExp, setUpdateExp }) => {
 
         let expArr = [...selfData?.experience,data];
         let newData = {...selfData,experience:expArr};
+        handleEditFunc(newData);
+    }
+    const handleOnDelete = () => {
+        let newFilteredData = selfData?.experience.filter((item) => item._id !== updateExp?.data?._id);
+        let newData = {...selfData, experience: newFilteredData};
         handleEditFunc(newData);
     }
 
@@ -54,7 +59,12 @@ const ExpModal = ({ handleEditFunc, selfData, updateExp, setUpdateExp }) => {
             <input type="text" value={data.location} onChange={(e) => onChangeHandle(e,'location')} className='p-2 mt-1 w-full border-1 rounded-md' placeholder='Enter Place'/>
         </div>
 
-        <div className='bg-blue-950 text-white w-fit py-1 px-3 cursor-pointer rounded-2xl' onClick={handleOnSave}>Save</div>
+        <div className='flex justify-between'>
+            <div className='bg-blue-950 text-white w-fit py-1 px-3 cursor-pointer rounded-2xl' onClick={handleOnSave}>Save</div>
+            {
+                updateExp?.clicked && <div className='bg-blue-950 text-white w-fit py-1 px-3 cursor-pointer rounded-2xl' onClick={handleOnDelete}>Delete</div>
+            }
+        </div>
 
     </div>
   )
