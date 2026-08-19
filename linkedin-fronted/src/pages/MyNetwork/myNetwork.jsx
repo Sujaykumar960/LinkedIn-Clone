@@ -4,7 +4,8 @@ import axios from 'axios'
 
 const MyNetwork = () => {
 
-    const [text,setText] = useState("Catch Up with Friends")
+    const [text,setText] = useState("Catch Up with Friends");
+    const [data,setData] = useState([]);
 
     const handleFriends = async() => {
         setText("Catch Up with Friends")
@@ -17,6 +18,7 @@ const MyNetwork = () => {
     const fetchFriendList = async() => {
         await axios.get('http://localhost:4000/api/users/friendsList',{withCredentials:true}).then((res)=>{
             console.log(res)
+            setData(res.data.friends)
         }).catch((err)=>{
             console.log(err)
             alert("Something Went Wrong")
@@ -24,8 +26,15 @@ const MyNetwork = () => {
     }
 
     const fetchPendingRequest = async() => {
-        // Fetch pending request logic
+        await axios.get('http://localhost:4000/api/users/pendingFriendsList',{withCredentials:true}).then((res)=>{
+            console.log(res)
+            setData(res.data.pending_friends)
+        }).catch((err)=>{
+            console.log(err)
+            alert("Something Went Wrong")
+        })
     }
+
 
     useEffect(() => {
         if(text === "Catch Up with Friends") {
@@ -46,21 +55,20 @@ const MyNetwork = () => {
         </div>
 
         <div className='flex h-[80vh] w-full gap-7 flex-wrap items-start justify-center'>
-            <div className='md:w-[23%] h-[270px] sm:w-full'>
-                <ProfileCard />
-            </div>
             
-            <div className='md:w-[23%] h-[270px] sm:w-full'>
-                <ProfileCard />
-            </div>
+            {
+                data.map((item,index) => {
+                    return(
+                        <div key={index} className='md:w-[23%] h-[270px] sm:w-full'>
+                            <ProfileCard data={item} />
+                        </div>
+                    );
+                })
+            }
 
-            <div className='md:w-[23%] h-[270px] sm:w-full'>
-                <ProfileCard />
-            </div>
-            
-            <div className='md:w-[23%] h-[270px] sm:w-full'>
-                <ProfileCard />
-            </div>
+            {
+                data.length===0 ? text ==="Catch Up with Friends" ? <div>No Any Friends Yet</div> : <div>No any Pending Friends Yet</div> : null
+            }
 
         </div>
 
