@@ -32,6 +32,16 @@ const Profile = () => {
   const [postData, setPostData] = useState([]);
   const [ownData, setOwnData] = useState(null);
 
+  const [updateExp,setUpdateExp] = useState({clicked:"", id:"",datas:{}});
+
+  const updateExpEdit = (id,data) => {
+    setUpdateExp({...updateExp,
+      clicked:true, id:id, data:data
+
+    })
+    setExpModal(prev=>!prev)
+  }
+
   useEffect(() => {
     fetchDataOnLoad()
   }, [])
@@ -60,6 +70,9 @@ const Profile = () => {
   }
 
   const handleExpModal = () => {
+    if(expModal){
+      setUpdateExp({clicked:"",id:"",datas:{}});
+    }
     setExpModal(prev => !prev);
   }
 
@@ -218,7 +231,7 @@ const Profile = () => {
                               <div className={clsx('text-sm', 'text-gray-500')}>{item?.duration}</div>
                               <div className={clsx('text-sm', 'text-gray-500')}>{item?.location}</div>
                             </div>
-                            <div className='cursor-pointer'><EditIcon /></div>
+                            <div onClick={() => updateExpEdit(index, item)} className='cursor-pointer'><EditIcon /></div>
                           </div>
                         );
                       })
@@ -260,13 +273,13 @@ const Profile = () => {
 
         {
           aboutModal && <Modal title="Edit About" closeModal={handleAboutModal}>
-            <AboutModal /> 
+            <AboutModal handleEditFunc={handleEditFunc} selfData={ownData} /> 
           </Modal>
         }
 
         {
           expModal && <Modal title="Experience" closeModal={handleExpModal}>
-            <ExpModal />
+            <ExpModal handleEditFunc={handleEditFunc} selfData={ownData} updateExp={updateExp} setUpdateExp={updateExpEdit} />
           </Modal>
         }
 

@@ -2,10 +2,26 @@ import React,{useState} from 'react'
 
 const EditInfoModal = ({handleEditFunc, selfData}) => {
 
-    const [data, setData] = useState({f_name:selfData.f_name, headline:selfData.headline, curr_company:selfData.curr_company, curr_location:selfData.curr_location});
+    const [data, setData] = useState({
+        f_name: selfData?.f_name || '',
+        headline: selfData?.headline || '',
+        curr_company: selfData?.curr_company || '',
+        curr_location: selfData?.curr_location || ''
+    });
 
         const onChangeHandle = (event,key) => {
             setData({...data, [key]:event.target.value});
+        }
+
+        const handleSaveBtn = async() => {
+            try {
+                let newData = {...selfData,...data};
+                console.log('Saving data:', newData);
+                await handleEditFunc(newData);
+            } catch (error) {
+                console.error('Error saving:', error);
+                alert('Failed to save. Please try again.');
+            }
         }
 
   return (
@@ -34,7 +50,7 @@ const EditInfoModal = ({handleEditFunc, selfData}) => {
             <input value={data.curr_location} onChange={(e)=>{onChangeHandle(e,'curr_location')}} type="text" className='p-2 mt-1 w-full border-1 rounded-md' placeholder='Enter Current Location'/>
         </div>
 
-        <div className='bg-blue-950 text-white w-fit py-1 px-3 cursor-pointer rounded-2xl'>Save</div>
+        <div className='bg-blue-950 text-white w-fit py-1 px-3 cursor-pointer rounded-2xl' onClick={handleSaveBtn}>Save</div>
     </div>
   )
 }

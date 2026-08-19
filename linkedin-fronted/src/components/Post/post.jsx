@@ -9,7 +9,7 @@ import axios from 'axios';
 import { ToastContainer,toast} from 'react-toastify';
 import { Link } from 'react-router-dom';
 
-const Post = ({ profile, item, key, personalData }) => {
+const Post = ({ profile, item, personalData }) => {
   const [seeMore, setSeeMore] = useState(false);
   const [comment, setComment] = useState(false);
 
@@ -74,9 +74,15 @@ const Post = ({ profile, item, key, personalData }) => {
   return (
     <Card padding={0} className={`${profile ? 'h-full' : ''} w-full flex flex-col`}>
       <div className="flex gap-3 p-4 flex-shrink-0">
-        <Link to={`/profile/${item?.user?._id}`} className="w-12 h-12 rounded-4xl">
-          <img src={item?.user?.profilePic} alt="" className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer" />
-        </Link>
+        <div className="w-12 h-12 rounded-4xl">
+          {profile ? (
+            <img src={item?.user?.profilePic} alt="" className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer" />
+          ) : (
+            <Link to={`/profile/${item?.user?._id}`} className="w-12 h-12 rounded-4xl">
+              <img src={item?.user?.profilePic} alt="" className="rounded-4xl w-12 h-12 border-2 border-white cursor-pointer" />
+            </Link>
+          )}
+        </div>
         <div>
           <div className="text-lg font-semibold">{item?.user?.f_name}</div>
           <div className="text-xs text-gray-500">{item?.user?.headline}</div>
@@ -138,17 +144,8 @@ const Post = ({ profile, item, key, personalData }) => {
             <img src={personalData?.profilePic} alt="" className="rounded-full w-10 h-10 border-2 border-white cursor-pointer" />
 
             <form action="" className="w-full flex gap-2" onSubmit={handleSendComment}>
-              <input
-                value={commentText}
-                onChange={(event)=>setCommentText(event.target.value)}
-                type="text"
-                placeholder="Add a comment..."
-                className="w-full border py-3 px-5 rounded-3xl hover:bg-gray-100"
-              />
-
-              <button type="submit" className="cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3">
-                Send
-              </button>
+              <input value={commentText} onChange={(event)=>setCommentText(event.target.value)} type="text" placeholder="Add a comment..." className="w-full border py-3 px-5 rounded-3xl hover:bg-gray-100" />
+              <button type="submit" className="cursor-pointer bg-blue-800 text-white rounded-3xl py-1 px-3">Send</button>
             </form>
           </div>
 
