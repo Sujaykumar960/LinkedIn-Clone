@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
 
 const MyNetwork = () => {
@@ -12,6 +12,14 @@ const MyNetwork = () => {
     const handlePending = async() => {
         setText("Pending Request")
     }
+
+    useEffect(() => {
+        if(text === "Catch Up with Friends") {
+            fetchFriendList();
+        }else{
+            fetchPendingRequest();
+        }
+    },[text])
 
   return (
     <div className='px-5 xl:px-50 py-9 flex flex-col gap-5 w-full mt-5 bg-gray-100'>
