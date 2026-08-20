@@ -58,6 +58,8 @@ const Profile = () => {
       setPostData(postDatas.data.posts);
       setOwnData(ownDatas.data.user);
 
+      localStorage.setItem('userInfo', JSON.stringify(ownDatas.data.user));
+
     }catch(err){
         console.log(err);
         alert("Something want Wrong");
