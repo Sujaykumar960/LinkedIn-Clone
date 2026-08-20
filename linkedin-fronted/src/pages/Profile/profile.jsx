@@ -119,13 +119,13 @@ const Profile = () => {
                 <Card padding={0}>
                   <div className={clsx('w-full', 'h-fit', 'bg-gray-200')}>
                     <div className={clsx('relative', 'w-full', 'h-[200px]')}>
-                      <div className={clsx('absolute', 'cursor-pointer', 'top-3', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleOnEditCover}><EditIcon /></div>
+                      { userData?._id === ownData?._id && <div className={clsx('absolute', 'cursor-pointer', 'top-3', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleOnEditCover}><EditIcon /></div> }
                       <img className={clsx('w-full', 'h-[200px]', 'rounded-tr-lg', 'rounded-tl-lg')} src={userData?.cover_pic} alt="" />
                       <div className={clsx('absolute', 'object-cover', 'top-24', 'left-6', 'z-10')} onClick={handleCircularImageOpen}><img className={clsx('rounded-full', 'border-2', 'border-white', 'cursor-pointer', 'w-30', 'h-30')} src={userData?.profilePic} alt="" /></div>
                     </div>
 
                     <div className={clsx('mt-10', 'relative', 'px-8', 'py-2')}>
-                      <div className={clsx('absolute', 'cursor-pointer', 'top-0', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleInfoModal}><EditIcon /></div>
+                      { userData?._id === ownData?._id && <div className={clsx('absolute', 'cursor-pointer', 'top-0', 'right-3', 'z-20', 'w-[35px]', 'flex', 'justify-center', 'items-center', 'h-[35px]', 'rounded-full', 'p-3', 'bg-white')} onClick={handleInfoModal}><EditIcon /></div> }
                       <div className='w-full'>
                         <div className='text-2xl'>{userData?.f_name}</div>
                         <div className='text-gray-700'>{userData?.headline}</div>
@@ -157,7 +157,7 @@ const Profile = () => {
                 <Card padding={1}>
                   <div className={clsx('flex', 'justify-between', 'items-center')}>
                     <div className='text-xl'>About</div>
-                    <div className='cursor-pointer' onClick={handleAboutModal}><EditIcon /></div>
+                    { userData?._id === ownData?._id && <div className='cursor-pointer' onClick={handleAboutModal}><EditIcon /></div> }
                   </div>
                   <div className={clsx('text-gray-700', 'text-md', 'w-[80%]')}>{userData?.about || "No information added yet"}</div>
                 </Card>
@@ -218,7 +218,9 @@ const Profile = () => {
                 <Card padding={1}>
                   <div className={clsx('flex', 'justify-between', 'items-center')}>
                     <div className='text-xl'>Experience</div>
-                    <div className='cursor-pointer' onClick={handleExpModal}><AddIcon /></div>
+                    {
+                      userData?._id === ownData?._id && <div className='cursor-pointer' onClick={handleExpModal}><AddIcon /></div>
+                    }
                   </div>
 
                   <div className='mt-5'>
@@ -233,15 +235,14 @@ const Profile = () => {
                               <div className={clsx('text-sm', 'text-gray-500')}>{item?.duration}</div>
                               <div className={clsx('text-sm', 'text-gray-500')}>{item?.location}</div>
                             </div>
-                            <div onClick={() => updateExpEdit(index, item)} className='cursor-pointer'><EditIcon /></div>
+                            {
+                              userData?._id === ownData?._id && <div onClick={() => {updateExpEdit(item._id, item)}} className='cursor-pointer'><EditIcon /></div>
+                            }
                           </div>
                         );
                       })
 
                     }
-                    
-                    
-
                   </div>
                 </Card>
 
