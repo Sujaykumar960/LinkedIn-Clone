@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from '../../components/Card/card'
+import { Link } from 'react-router-dom'
 
 const ProfileCard = (props) => {
   return (
@@ -9,7 +10,9 @@ const ProfileCard = (props) => {
                 <img src={props?.data?.cover_pic} alt="" className='rounded-t-md h-full w-full' />
             </div>
             <div className='absolute top-14 left-6 z-10'>
-                <img src={props?.data?.profilePic} alt="" className='rounded-full border-2 h-16 w-16 border-white cursor-pointer'/>
+                <Link to={`/profile/${props?.data?._id}`}>
+                    <img src={props?.data?.profilePic} alt="" className='rounded-full border-2 h-16 w-16 border-white cursor-pointer'/>
+                </Link>
             </div>
         </div>
         <div className='p-5'>

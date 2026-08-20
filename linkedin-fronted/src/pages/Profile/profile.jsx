@@ -44,7 +44,7 @@ const Profile = () => {
 
   useEffect(() => {
     fetchDataOnLoad()
-  }, [])
+  }, [id])
 
   const fetchDataOnLoad = async() => {
     try{
