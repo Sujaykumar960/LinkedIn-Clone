@@ -116,7 +116,7 @@ const Profile = () => {
   }
 
   const isInPendingList = () => {
-    let arr = userData?.friends?.filter((item) => { return item === ownData?._id });
+    let arr = userData?.pending_friends?.filter((item) => { return item === ownData?._id });
     return arr?.length;
   }
 
@@ -150,7 +150,6 @@ const Profile = () => {
         setTimeout(() => {
           window.location.reload();
         },2000)
-        
       }).catch(err => {
       console.log(err)
       toast.error(err?.response?.data?.error)

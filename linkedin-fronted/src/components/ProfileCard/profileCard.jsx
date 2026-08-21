@@ -6,9 +6,9 @@ const ProfileCard = (props) => {
   return (
     <Card padding={0}>
         <div className='relative h-25'>
-            <div className='relative w-full h-22 rounded-md'>
+            <Link to={`/profile/${props?.data?._id}`} className='relative w-full h-22 rounded-md'>
                 <img src={props?.data?.cover_pic} alt="" className='rounded-t-md h-full w-full' />
-            </div>
+            </Link>
             <div className='absolute top-14 left-6 z-10'>
                 <Link to={`/profile/${props?.data?._id}`}>
                     <img src={props?.data?.profilePic} alt="" className='rounded-full border-2 h-16 w-16 border-white cursor-pointer'/>
