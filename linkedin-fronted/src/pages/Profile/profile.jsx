@@ -113,6 +113,31 @@ const Profile = () => {
     let arr = userData?.friends?.filter((item) => { return item === ownData?._id });
     return arr?.length;
   }
+
+  const isInPendingList = () => {
+    let arr = userData?.friends?.filter((item) => { return item === ownData?._id });
+    return arr?.length;
+  }
+
+  const isInSelfPendingList = () => {
+    let arr = ownData?.pending_friends?.filter((item) => { return item === userData?._id });
+    return arr?.length;
+  }
+
+  const checkFriendStatus = () => {
+    if(amIfriend()){
+      return "Disconnect";
+    } 
+    else if(isInSelfPendingList()){
+      return "Approve Request";
+    } 
+    else if(isInPendingList()){
+      return "Request Sent";
+    }
+    else {
+      return "Connect"
+    }
+  }
   
   return (
     <div className={clsx('px-5', 'xl:px-50', 'py-5', 'mt-5', 'flex', 'flex-col', 'gap-5', 'w-full', 'pt-12', 'bg-gray-100')}>
@@ -144,8 +169,8 @@ const Profile = () => {
                             {userData?._id === ownData?._id && <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Logout</div>}
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
-                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div>
-                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Connect</div>
+                            { amIfriend() ? <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div> : null }
+                            { userData?._id === ownData?._id ? null : <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Connect</div> }
                           </div>
                         </div>
 
