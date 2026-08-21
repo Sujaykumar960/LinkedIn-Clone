@@ -15,6 +15,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ToastContainer,toast } from 'react-toastify';
 
 
 const Profile = () => {
@@ -138,6 +139,26 @@ const Profile = () => {
       return "Connect"
     }
   }
+
+  const handleSendFriendRequest = async() => {
+    
+    if(checkFriendStatus() === "Request Sent") return;
+
+    if(checkFriendStatus() === "Connect"){
+      await axios.post('http://localhost:4000/api/users/sendFriendReq',{receiver:userData?._id},{withCredentials:true}).then(res=>{
+        toast.success(res.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        },2000)
+        
+      }).catch(err => {
+      console.log(err)
+      toast.error(err?.response?.data?.error)
+    })
+    }
+
+
+  }
   
   return (
     <div className={clsx('px-5', 'xl:px-50', 'py-5', 'mt-5', 'flex', 'flex-col', 'gap-5', 'w-full', 'pt-12', 'bg-gray-100')}>
@@ -170,7 +191,7 @@ const Profile = () => {
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
                             { amIfriend() ? <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div> : null }
-                            { userData?._id === ownData?._id ? null : <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>{checkFriendStatus()}</div> }
+                            { userData?._id === ownData?._id ? null : <div onClick={handleSendFriendRequest} className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>{checkFriendStatus()}</div> }
                           </div>
                         </div>
 
@@ -321,6 +342,8 @@ const Profile = () => {
             <MessageModal />
           </Modal>
         }
+
+        <ToastContainer />
     
     </div>
   )
