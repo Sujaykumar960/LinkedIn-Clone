@@ -170,7 +170,7 @@ const Profile = () => {
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
                             { amIfriend() ? <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div> : null }
-                            { userData?._id === ownData?._id ? null : <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Connect</div> }
+                            { userData?._id === ownData?._id ? null : <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>{checkFriendStatus()}</div> }
                           </div>
                         </div>
 
