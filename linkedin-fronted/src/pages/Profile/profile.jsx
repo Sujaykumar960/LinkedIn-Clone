@@ -153,7 +153,27 @@ const Profile = () => {
       }).catch(err => {
       console.log(err)
       toast.error(err?.response?.data?.error)
-    })
+      })
+    }else if(checkFriendStatus() === "Approve Request"){
+      await axios.post('http://localhost:4000/api/users/acceptFriendRequest',{friendId:userData?._id},{withCredentials:true}).then(res => {
+        toast.success(res.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        },2000)
+      }).catch(err => {
+      console.log(err)
+      toast.error(err?.response?.data?.error)
+      })
+    } else {
+      await axios.delete(`http://localhost:4000/api/users/removeFromFriendList/${userData?._id}`,{withCredentials:true}).then(res=>{
+        toast.success(res.data.message);
+        setTimeout(() => {
+          window.location.reload();
+        },2000)
+      }).catch(err => {
+      console.log(err)
+      toast.error(err?.response?.data?.error)
+      })
     }
 
 
