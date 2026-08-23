@@ -7,10 +7,12 @@ import Post from '../../components/Post/post'
 import axios from 'axios'
 
 const AllActivities = () => {
+  
     const { id } = useParams();
 
     const [post, setPosts] = useState([]);
     const [ownData, setOwnData] = useState(null);
+    
 
     const fetchDataOnLoad = async() => {
       await axios.get(`http://localhost:4000/api/post/getAllPostForUser/${id}`).then(res => {
@@ -21,9 +23,10 @@ const AllActivities = () => {
         alert(err?.response?.data?.error);
       })
     }
-
     useEffect(() => {
       fetchDataOnLoad();
+      let userData = localStorage.getItem('userInfo')
+      setOwnData(userData? JSON.parse(userData) : null)
     }, [id])
 
   return (
@@ -52,7 +55,7 @@ const AllActivities = () => {
                       post.map((item, index) => {
                         return(
                          <div key={index}>
-                           <Post item={item} personalData={post[0]?.user} />
+                           <Post item={item} personalData={ownData} />
                           </div>
                         )
                       })
