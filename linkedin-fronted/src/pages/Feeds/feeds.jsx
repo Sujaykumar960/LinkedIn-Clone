@@ -34,11 +34,9 @@ const Feeds = () => {
         await axios.get('http://localhost:4000/api/users/self',{withCredentials:true}),
         await axios.get('http://localhost:4000/api/post/getAllPost')
       ]);
-
       setPersonalData(userData.data.user);
       localStorage.setItem('userInfo', JSON.stringify(userData.data.user));
       setPost(postData.data.posts);
-      
     }catch(err){
       console.log(err);
       toast.error(err?.response?.data?.error);

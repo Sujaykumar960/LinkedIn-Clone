@@ -8,12 +8,43 @@ import WorkIcon from '@mui/icons-material/Work';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Navbar2 = () => {
   const [dropdown, setDropDown] = React.useState(false);
   const location = useLocation();
 
-  const[userData,setUserData] = useState(null) 
+  const[userData,setUserData] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedTerm, setDebouncedTerm] = useState('');
+  const [searchUser, setSearchUser] = useState([]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedTerm(searchTerm);
+    }, 1000);  // delay in ms 
+    return () => {
+      clearTimeout(handler)
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if(debouncedTerm) {
+      searchAPICall()
+    }
+  }, [debouncedTerm]);
+
+  const searchAPICall = async() => {
+    await axios.get(`http://localhost:4000/api/users/findUser?query=${debouncedTerm}`,{withCredentials:true}).then(res=>{
+      console.log(res)
+      setSearchUser(res.data.users)
+    }).catch(err => {
+        console.log(err);
+        alert(err?.response?.data?.error);
+    })
+  }
+
   
   useEffect(() => {
     let userData = localStorage.getItem('userInfo')
@@ -28,11 +59,7 @@ const Navbar2 = () => {
           <img className="w-9 h-9" src={linkedinLogo} alt="LinkedIn Logo" />
         </Link>
         <div className="relative">
-          <input
-            className="searchInput w-70 bg-gray-100 rounded-sm h-10 px-4 border-1"
-            placeholder="Search"
-            type="text"
-          />
+          <input value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value)}} className="searchInput w-70 bg-gray-100 rounded-sm h-10 px-4 border" placeholder="Search" type="text" />
           {dropdown && (
             <div className="absolute w-88 left-0 bg-gray-200">
               <div className="flex gap-2 mb-1 items-center cursor-pointer">
