@@ -61,8 +61,6 @@ function App() {
         <Route path='/profile/:id/activities' element={isLogin? <AllActivities /> : <Navigate to='/login' />} />
 
         <Route path='/profile/:id/activities/:postId' element={isLogin? <SingleActivity /> : <Navigate to='/login' />} />
-        
-
 
       </Routes>
       <Footer />

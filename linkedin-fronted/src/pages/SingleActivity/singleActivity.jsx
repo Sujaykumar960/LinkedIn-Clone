@@ -10,18 +10,23 @@ const SingleActivity = () => {
 
   const { id,postId } = useParams();
 
-  console.log(postId)
-
-  const[userData,setUserData] = useState(null) 
+  const [post,setPost] = useState(null);
+  const[ownData,setOwnData] = useState(null) 
 
   const fetchDataOnLoad = async() => {
-    // await axios .get(`http://localhost:4000/api/post//getPostById/${}`)
+    await axios .get(`http://localhost:4000/api/post/getPostById/${postId}`).then((res)=>{
+      console.log(res);
+      setPost(res.data.post);
+    }).catch(err => {
+        console.log(err);
+        alert(err?.response?.data?.error);
+    })
   }
   
   useEffect(() => {
     fetchDataOnLoad()
     let userData = localStorage.getItem('userInfo')
-    setUserData(userData? JSON.parse(userData) : null)
+    setOwnData(userData? JSON.parse(userData) : null)
   },[])
 
   return (
@@ -29,7 +34,7 @@ const SingleActivity = () => {
       {/* left side bar */}
       <div className='w-[21%] sm:block sm:w-[23%] hidden py-5'>
         <div className='h-fit'>
-          <ProfileCard />
+          <ProfileCard data={post?.user} />
         </div>
 
         
@@ -39,7 +44,7 @@ const SingleActivity = () => {
       {/* middle content */}
       <div className='w-[100%] py-5 sm:w-[50%]'>
         <div>
-          <Post personalData={userData} />
+          <Post item={post} personalData={ownData} />
         </div>
       </div>
 

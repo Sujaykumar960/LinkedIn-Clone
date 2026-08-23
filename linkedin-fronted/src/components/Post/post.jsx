@@ -69,6 +69,16 @@ const Post = ({ profile, item, personalData }) => {
     })
   }
 
+  const copyToClipboard = async() => {
+    try{
+      let string = `localhost:5173/profile/${item?.user?._id}/activities/${item?._id}`
+      await navigator.clipboard.writeText(string)
+      toast.success('Link copied to clipboard!')
+    } catch (err) {
+      console.error('Failed to copy link')
+    }
+  }
+
   const desc = item?.desc
 
   return (
@@ -130,7 +140,7 @@ const Post = ({ profile, item, personalData }) => {
               <CommentIcon sx={{ fontSize: 22 }} /> <span>Comment</span>{" "}
             </div>
 
-            <div className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
+            <div onClick={copyToClipboard} className="w-[33%] justify-center flex gap-2 items-center border-r-1 border-gray-100 p-2 cursor-pointer hover:bg-gray-100">
               <SendIcon sx={{ fontSize: 22 }} /> <span>Share</span>{" "}
             </div>
           </div>

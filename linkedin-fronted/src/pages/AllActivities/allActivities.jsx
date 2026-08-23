@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
 import Advertisement from '../../components/Advertisement/advertisement'
-import { useParams } from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import Card from '../../components/Card/card'
 import Post from '../../components/Post/post'
 import axios from 'axios'
@@ -50,7 +50,7 @@ const AllActivities = () => {
                 <div className='cursor-pointer w-fit p-2 border-1 rounded-4xl bg-green-800 my-2 text-white font-semibold'>Posts</div>
 
                 <div className='my-2 flex flex-col gap-2'>
-                    
+
                     {
                       post.map((item, index) => {
                         return(
