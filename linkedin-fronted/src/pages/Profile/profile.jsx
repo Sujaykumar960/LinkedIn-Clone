@@ -177,6 +177,15 @@ const Profile = () => {
     }
 
   }
+
+  const handleLogout = async() => {
+    await axios.post('http://localhost:4000/api/users/logout',{},{withCredentials:true}).then(res=>{
+
+    }).catch(err => {
+      console.log(err)
+      toast.error(err?.response?.data?.error)
+    })
+  }
   
   return (
     <div className={clsx('px-5', 'xl:px-50', 'py-5', 'mt-5', 'flex', 'flex-col', 'gap-5', 'w-full', 'pt-12', 'bg-gray-100')}>
@@ -205,15 +214,13 @@ const Profile = () => {
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
                             <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Open to</div>
                             <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Share</div>
-                            {userData?._id === ownData?._id && <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Logout</div>}
+                            {userData?._id === ownData?._id && <div onClick={handleLogout} className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Logout</div>}
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
                             { amIfriend() ? <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={handleMessageModal}>Message</div> : null }
                             { userData?._id === ownData?._id ? null : <div onClick={handleSendFriendRequest} className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>{checkFriendStatus()}</div> }
                           </div>
                         </div>
-
-
                       </div>
                     </div>
 
@@ -277,9 +284,11 @@ const Profile = () => {
 
                   </div>
 
-                  <div className='w-full flex justify-center items-center'>
-                    <Link to={`/profile/${id}/activities`} className='p-2 rounded-xl cursor-pointer hover:bg-gray-300'>Show all Posts <ArrowForwardIcon /></Link>
-                  </div>
+                  {
+                    postData.length > 5 && <div className='w-full flex justify-center items-center'>
+                      <Link to={`/profile/${id}/activities`} className='p-2 rounded-xl cursor-pointer hover:bg-gray-300'>Show all Posts <ArrowForwardIcon /></Link>
+                    </div>
+                  }
                 </Card>
               </div>
 

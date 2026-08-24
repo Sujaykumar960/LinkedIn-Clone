@@ -11,7 +11,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Navbar2 = () => {
-  const [dropdown, setDropDown] = React.useState(false);
+  // const [dropdown, setDropDown] = useState(false);
   const location = useLocation();
 
   const[userData,setUserData] = useState(null);
@@ -38,6 +38,7 @@ const Navbar2 = () => {
   const searchAPICall = async() => {
     await axios.get(`http://localhost:4000/api/users/findUser?query=${debouncedTerm}`,{withCredentials:true}).then(res=>{
       console.log(res)
+      
       setSearchUser(res.data.users)
     }).catch(err => {
         console.log(err);
@@ -60,20 +61,20 @@ const Navbar2 = () => {
         </Link>
         <div className="relative">
           <input value={searchTerm} onChange={(e) => {setSearchTerm(e.target.value)}} className="searchInput w-70 bg-gray-100 rounded-sm h-10 px-4 border" placeholder="Search" type="text" />
-          {dropdown && (
-            <div className="absolute w-88 left-0 bg-gray-200">
-              <div className="flex gap-2 mb-1 items-center cursor-pointer">
-                <div>
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNfTkosk_XISYGUe8YAUWMrv0kcP5a4YMcVQ&s"
-                    alt=""
-                  />
-                </div>
-                <div>Danish</div>
-              </div>
+          {
+            searchUser.length>0 && debouncedTerm.length!==0 && <div className="absolute w-88 left-0 bg-gray-200">
+              {
+                searchUser.map((item, index) => {
+                  return(
+                    <Link to={`/profile/${item?._id}`} key={index} className="flex gap-2 mb-1 items-center cursor-pointer" onClick={()=>setSearchTerm("")}>
+                      <div><img className="w-10 h-10 rounded-full" src={item?.profilePic} alt="" /></div>
+                      <div>{item.f_name}</div>
+                    </Link>
+                  );
+                })
+              }
             </div>
-          )}
+          }
         </div>
       </div>
 
