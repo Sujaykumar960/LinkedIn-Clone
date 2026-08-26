@@ -180,11 +180,22 @@ const Profile = () => {
 
   const handleLogout = async() => {
     await axios.post('http://localhost:4000/api/users/logout',{},{withCredentials:true}).then(res=>{
-
+      localStorage.clear();
+      window.location.reload();
     }).catch(err => {
       console.log(err)
       toast.error(err?.response?.data?.error)
     })
+  }
+
+  const copyToClipboard = async() => {
+    try{
+      let string = `localhost:5173/profile/${item?.user?._id}/activities/${item?._id}`
+      await navigator.clipboard.writeText(string)
+      toast.success('Link copied to clipboard!')
+    } catch (err) {
+      console.error('Failed to copy link')
+    }
   }
   
   return (
