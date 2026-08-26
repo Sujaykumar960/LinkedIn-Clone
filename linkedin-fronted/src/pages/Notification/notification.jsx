@@ -1,16 +1,39 @@
-import React from 'react'
+import React, {useEffect,useState} from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
 import Advertisement from '../../components/Advertisement/advertisement'
 import Card from '../../components/Card/card'
+import axios from 'axios'
 
 const Notification = () => {
+
+  const [ownData,setOwnData] = useState(null) ;
+
+  const [notifications,setNotifications] = useState([]);
+
+  const fetchNotificationData = async() => {
+    await axios.get('http://localhost:4000/api/notification',{withCredentials:true}).then(res=>{
+      console.log(res.data.notifications);
+      setNotifications(res.data.notifications);
+    }).catch(err=>{
+      console.log(err);
+      alert("Something went Wrong");
+    })
+  }
+  
+  useEffect(() => {
+    let userData = localStorage.getItem('userInfo')
+    setOwnData(userData? JSON.parse(userData) : null)
+
+    fetchNotificationData()
+  },[])
+
   return (
     <div className='px-5 xl:px-50 py-9 flex gap-5 w-full mt-5 bg-gray-100'>
 
       {/* left side bar */}
       <div className='w-[21%] sm:block sm:w-[23%] hidden py-5'>
         <div className='h-fit'>
-          <ProfileCard />
+          <ProfileCard data={ownData}/>
         </div>
       </div>
 
@@ -22,22 +45,19 @@ const Notification = () => {
                 <div className='w-full'>
 
                     {/* For each Notifications */}
-                    <div className={`border-b cursor-pointer flex gap-4 items-center border-gray-300 p-3`}>
-                        <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png" alt="" className='rounded-full cursor-pointer w-17 h-17'/>
-                        <div>Dummy User1 has sent you a connection request</div>
-                    </div>
 
-                    {/* For each Notifications */}
-                    <div className={`border-b cursor-pointer flex gap-4 items-center border-gray-300 p-3`}>
-                        <img src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png" alt="" className='rounded-full cursor-pointer w-17 h-17'/>
-                        <div>Dummy User1 has commented on your post</div>
-                    </div>
 
-                    {/* For each Notifications */}
-                    <div className={`border-b cursor-pointer flex gap-4 items-center border-gray-300 p-3`}>
-                        <img src="https://media.istockphoto.com/id/2151669184/vector/vector-flat-illustration-in-grayscale-avatar-user-profile-person-icon-gender-neutral.jpg?s=612x612&w=0&k=20&c=UEa7oHoOL30ynvmJzSCIPrwwopJdfqzBs0q69ezQoM8=" alt="" className='rounded-full cursor-pointer w-17 h-17'/>
-                        <div>Dummy User2 has sent you a connection request</div>
-                    </div>
+                    {
+                      notifications.map((item,index)=>{
+                        return(
+                          <div className={`border-b cursor-pointer flex gap-4 items-center border-gray-300 p-3 ${item?.isRead?'bg-gray-200': 'bg-blue-100'}`}>
+                            <img src={item?.sender?.profilePic} alt="" className='rounded-full cursor-pointer w-17 h-17'/>
+                            <div>{item?.content}</div>
+                          </div>
+                        );
+                      })
+                    }
+
 
                 </div>
             </Card>
