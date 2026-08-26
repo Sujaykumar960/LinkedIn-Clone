@@ -190,7 +190,7 @@ const Profile = () => {
 
   const copyToClipboard = async() => {
     try{
-      let string = `localhost:5173/profile/${item?.user?._id}/activities/${item?._id}`
+      let string = `localhost:5173/profile/${id}`
       await navigator.clipboard.writeText(string)
       toast.success('Link copied to clipboard!')
     } catch (err) {
@@ -224,7 +224,7 @@ const Profile = () => {
                         <div className={clsx('md:flex', 'w-full', 'justify-between')}>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
                             <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Open to</div>
-                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Share</div>
+                            <div className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')} onClick={copyToClipboard} >Share</div>
                             {userData?._id === ownData?._id && <div onClick={handleLogout} className={clsx('cursor-pointer', 'p-2', 'border-1', 'rounded-lg', 'bg-blue-800', 'text-white', 'font-semibold')}>Logout</div>}
                           </div>
                           <div className={clsx('my-5', 'flex', 'gap-5')}>
@@ -377,7 +377,7 @@ const Profile = () => {
 
         {
           messageModal && <Modal title="Send Message" closeModal={handleMessageModal}>
-            <MessageModal />
+            <MessageModal selfData={ownData} userData={userData} />
           </Modal>
         }
 
