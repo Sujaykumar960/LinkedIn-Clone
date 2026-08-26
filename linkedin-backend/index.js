@@ -2,6 +2,16 @@ const express = require('express');
 const app = express();
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const {Server} = require('socket.io')
+const http = require("http");
+
+const server = http.createServer(app);
+const io = new Server(server,{
+    cors:{
+        origin: "http://localhost:5173",
+        methods: ["GET", "POST"],
+    }
+})
 
 require('./connection');
 require('dotenv').config({path: "./config.env"});

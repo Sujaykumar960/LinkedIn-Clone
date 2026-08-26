@@ -65,6 +65,11 @@ exports.login = async(req, res) => {
     try{
         let {email, password} = req.body;
         const userExist = await User.findOne({email});
+
+        if(userExist && !userExist.password){
+            return res.status(400).json({ error: 'Please login through Google' });
+        }
+
         if(userExist && await bcryptjs.compare(password,userExist.password)){
             let token = jwt.sign({ userId: userExist._id}, process.env.JWT_PRIVATE_KEY);
             res.cookie('token',token,cookieOptions);

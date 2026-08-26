@@ -15,7 +15,7 @@ const Advertisement = () => {
       <Card padding={0}>
         <div className="relative h-25">
           <div className="relative w-full h-22 rounded-md">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR62N3ldPD_PCO6u_X-l7UaEo-L2r1NAZ_G0w&s" alt="" className="rounded-t-md h-full w-full" />
+            <img src={userData?.cover_pic} alt="" className="rounded-t-md h-full w-full" />
           </div>
           <div className="absolute top-14 left-[40%] z-10">
             <img src={userData?.profilePic} alt="" className="rounded-full border-2 h-14 w-14 border-white cursor-pointer" />
