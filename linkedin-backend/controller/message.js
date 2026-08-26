@@ -21,7 +21,7 @@ exports.getMessage = async(req, res) => {
         let message = await MessageModal.find({
             conversation: convId
         }).populate('sender')
-        return res.status(200).json({ message: "Fetched Message successfully", data: message });
+        return res.status(200).json({ message: "Fetched Message successfully", message: message });
 
     } catch(err){
         console.log(err);
