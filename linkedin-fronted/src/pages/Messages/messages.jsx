@@ -18,6 +18,11 @@ const Messages = () => {
 
     const [messages,setMessages] = useState([]);
 
+    const [loading,setLoading] = useState(false);
+    const [imageLink, setImageLink] = useState(null);
+
+    const [messageText,setMessageText] = useState("");
+
     const handleSelectedConv = (id, userData) => {
         setActiveConvId(id)
         setSelectedConDetail(userData)
@@ -77,6 +82,15 @@ const Messages = () => {
         }finally{
             setLoading(false);
         }
+    }
+
+    const handleSendMessage = async() => {
+        await axios.post(`http://localhost:4000/api/message`,{ conversation:activeConvId, message:messageText, picture:imageLink },{withCredentials:true}).then(res => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err);
+            alert("Something went Wrong");
+        })
     }
 
 
@@ -158,7 +172,7 @@ const Messages = () => {
 
                             {/* Space for typing message */}
                             <div className='p-2 w-full border-b border-gray-200'>
-                                <textarea rows={4} name="" id="" className='bg-gray-200 outline-0 rounded-xl text-sm w-full p-3' placeholder='Write a message'></textarea>
+                                <textarea value={messageText} onChange={(e) => setMessageText(e.target.value)} rows={4} name="" id="" className='bg-gray-200 outline-0 rounded-xl text-sm w-full p-3' placeholder='Write a message'></textarea>
                             </div>
 
                             <div className='p-3 flex justify-between items-center'>
@@ -166,9 +180,11 @@ const Messages = () => {
                                     <label htmlFor="messageImage" className='cursor-pointer'><ImageIcon /></label>
                                     <input type="file" id='messageImage' onChange={handleInputImage} className='hidden'/>
                                 </div>
-                                <div className='px-3 py-1 cursor-pointer rounded-2xl border bg-blue-800 text-white'>
-                                    Send
-                                </div>
+                                {
+                                    !loading && <div onClick={handleSendMessage} className='px-3 py-1 cursor-pointer rounded-2xl border bg-blue-800 text-white'>
+                                        Send
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
