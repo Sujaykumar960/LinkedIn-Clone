@@ -1,4 +1,4 @@
-// import React from 'react'
+
 import linkedinLogo from "../../assets/Linkedin_logo.png";
 import React, { useState,useEffect } from "react";
 import "./navbar2.css";
@@ -19,6 +19,7 @@ const Navbar2 = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedTerm, setDebouncedTerm] = useState('');
   const [searchUser, setSearchUser] = useState([]);
+  const [notificationCount, setNotificationCount] = useState("");
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -46,10 +47,23 @@ const Navbar2 = () => {
     })
   }
 
+  const fetchNotification = async() => {
+    await axios.get('http://localhost:4000/api/notification/activeNotification',{withCredentials:true}).then(res=>{
+      var count = res.data.count;
+      setNotificationCount(count);
+      
+    }).catch(err => {
+      console.log(err)
+      alert(err?.response?.data?.error);
+    })
+  } 
+
   
   useEffect(() => {
     let userData = localStorage.getItem('userInfo')
     setUserData(userData? JSON.parse(userData) : null)
+
+    fetchNotification()
   },[])
 
   console.log(location)
@@ -96,7 +110,7 @@ const Navbar2 = () => {
           <div className={`text-sm text-gray-500 ${location.pathname === '/messages' ? 'border-b-3':''}`}>Messaging</div>
         </Link>
         <Link to={'/notification'} className="flex flex-col items-center cursor-pointer">
-          <div><NotificationsIcon sx={{color:location.pathname==='/notification'?"black":"gray"}}/> <span className="p-1 rounded-full text-sm bg-red-700 text-white">1</span> </div>
+          <div><NotificationsIcon sx={{color:location.pathname==='/notification'?"black":"gray"}}/> {notificationCount > 0 && <span className="p-1 rounded-full text-sm bg-red-700 text-white">{notificationCount}</span>} </div>
           <div className={`text-sm text-gray-500 ${location.pathname === '/notification' ? 'border-b-3':''}`}>Notifications</div>
         </Link>
 
