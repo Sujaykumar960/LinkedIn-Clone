@@ -62,7 +62,7 @@ app.use('/api/conversation', ConversationRoutes);
 app.use('/api/message', MessageRoutes);
 const path = require('path');
 app.use(express.static(path.join(__dirname, '../linkedin-fronted/dist')));
-app.get('(.*)', (req, res) => {
+app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '../linkedin-fronted/dist', 'index.html'));
 });
 
