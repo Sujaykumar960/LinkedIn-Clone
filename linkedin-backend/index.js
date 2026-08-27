@@ -60,7 +60,11 @@ app.use('/api/notification', NotificationRoutes);
 app.use('/api/comment', CommentRoutes);
 app.use('/api/conversation', ConversationRoutes);
 app.use('/api/message', MessageRoutes);
-
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../linkedin-fronted/dist')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../linkedin-fronted/dist', 'index.html'));
+});
 
 server.listen(PORT, () => {
     console.log("Backend Server is running on port", PORT)

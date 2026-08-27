@@ -1,0 +1,11 @@
+{
+  "name": "linkedin-clone-root",
+  "version": "1.0.0",
+  "scripts": {
+    "install-backend": "npm install --prefix linkedin-backend",
+    "install-frontend": "npm install --prefix linkedin-fronted",
+    "build-frontend": "npm run build --prefix linkedin-fronted",
+    "build": "npm run install-backend && npm run install-frontend && npm run build-frontend",
+    "start": "npm start --prefix linkedin-backend"
+  }
+}
