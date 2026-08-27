@@ -7,7 +7,7 @@ import Post from '../../components/Post/post';
 import AddIcon from '@mui/icons-material/Add';
 import Modal from '../../components/Modal/modal'
 import ImageModal from '../../components/ImageModal/imageModal';
-import EditInfoModal from '../../components/EditInfoModal/editInfoModal';
+import EditInfoModal from '../../components/EditInfoModal/editinfoModal';
 import AboutModal from '../../components/AboutModal/aboutModal';
 import ExpModal from '../../components/ExpModal/expModal';
 import MessageModal from '../../components/MessageModal/messageModal';
