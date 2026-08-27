@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import ProfileCard from '../../components/ProfileCard/profileCard'
-import axios from 'axios'
+import api from '../../api'
 
 const MyNetwork = () => {
 
@@ -16,7 +16,7 @@ const MyNetwork = () => {
     }
 
     const fetchFriendList = async() => {
-        await axios.get('http://localhost:4000/api/users/friendsList',{withCredentials:true}).then((res)=>{
+        await api.get('/api/users/friendsList').then((res)=>{
             console.log(res)
             setData(res.data.friends)
         }).catch((err)=>{
@@ -26,7 +26,7 @@ const MyNetwork = () => {
     }
 
     const fetchPendingRequest = async() => {
-        await axios.get('http://localhost:4000/api/users/pendingFriendsList',{withCredentials:true}).then((res)=>{
+        await api.get('/api/users/pendingFriendsList').then((res)=>{
             console.log(res)
             setData(res.data.pending_friends)
         }).catch((err)=>{

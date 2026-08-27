@@ -3,7 +3,7 @@ import ProfileCard from '../../components/ProfileCard/profileCard'
 import Card from '../../components/Card/card'
 import Advertisement from '../../components/Advertisement/advertisement'
 import Post from '../../components/Post/post'
-import axios from 'axios'
+import api from '../../api'
 import { useParams } from 'react-router-dom'
 
 const SingleActivity = () => {
@@ -14,7 +14,7 @@ const SingleActivity = () => {
   const[ownData,setOwnData] = useState(null) 
 
   const fetchDataOnLoad = async() => {
-    await axios .get(`http://localhost:4000/api/post/getPostById/${postId}`).then((res)=>{
+    await api.get(`/api/post/getPostById/${postId}`).then((res)=>{
       console.log(res);
       setPost(res.data.post);
     }).catch(err => {

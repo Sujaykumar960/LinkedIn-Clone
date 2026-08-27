@@ -4,7 +4,7 @@ import Advertisement from '../../components/Advertisement/advertisement'
 import { useParams} from 'react-router-dom'
 import Card from '../../components/Card/card'
 import Post from '../../components/Post/post'
-import axios from 'axios'
+import api from '../../api'
 
 const AllActivities = () => {
   
@@ -15,7 +15,7 @@ const AllActivities = () => {
     
 
     const fetchDataOnLoad = async() => {
-      await axios.get(`http://localhost:4000/api/post/getAllPostForUser/${id}`).then(res => {
+      await api.get(`/api/post/getAllPostForUser/${id}`).then(res => {
         console.log(res);
         setPosts(res.data.posts);
       }).catch(err => {

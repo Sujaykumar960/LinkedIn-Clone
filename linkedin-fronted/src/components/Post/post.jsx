@@ -5,7 +5,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import CommentIcon from "@mui/icons-material/Comment";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
 import SendIcon from "@mui/icons-material/Send";
-import axios from 'axios';
+import api from '../../api';
 import { ToastContainer,toast} from 'react-toastify';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const Post = ({ profile, item, personalData }) => {
     e.preventDefault();
     if (commentText.trim().length===0) return toast.error('Comment cannot be empty');
 
-    await axios.post(`http://localhost:4000/api/comment`,{postId: item?._id,comment: commentText},{withCredentials:true}).then((res)=>{
+    await api.post(`/api/comment`,{postId: item?._id,comment: commentText}).then((res)=>{
       setComments([res.data.comment, ...comments]);
     }).catch ((err) => {
       console.log(err);
@@ -44,7 +44,7 @@ const Post = ({ profile, item, personalData }) => {
   }, [personalData, item]);
 
   const handleLikeFunc = async () => {
-    await axios.post('http://localhost:4000/api/post/likeDislike', { postId: item?._id }, { withCredentials: true }).then(res => {
+    await api.post('/api/post/likeDislike', { postId: item?._id }).then(res => {
       if (liked) {
         setNoOfLikes((prev) => prev - 1);
         setLiked(false)
@@ -60,7 +60,7 @@ const Post = ({ profile, item, personalData }) => {
 
   const handleCommentBoxOpenClose = async () => {
     setComment(true)
-    await axios.get(`http://localhost:4000/api/comment/${item?._id}`).then(res => {
+    await api.get(`/api/comment/${item?._id}`).then(res => {
       console.log(res)
       setComments(res.data.comments)
     }).catch(err => {

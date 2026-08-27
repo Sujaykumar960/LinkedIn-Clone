@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import GoogleLoginComp from '../../components/GoogleLogin/googleLoginComp';
 import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
+import api from '../../api';
 
 const signUp = (props) => {
     const navigate = useNavigate();
@@ -18,7 +18,7 @@ const signUp = (props) => {
             return toast.error("Please fill all Details");
         }
         
-        await axios.post('http://localhost:4000/api/users/register', registerField).then(res => {
+        await api.post('/api/users/register', registerField).then(res => {
 
             toast.success("Register successfully");
             setRegisterField({...registerField,email: "", password: "", f_name: ""});

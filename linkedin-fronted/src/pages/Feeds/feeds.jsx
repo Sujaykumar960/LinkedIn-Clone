@@ -9,7 +9,7 @@ import Post from '../../components/Post/post'
 import Modal from '../../components/Modal/modal';
 import AddModal from '../../components/AddModal/addModal';
 import Loader from '../../components/Loader/loader';
-import axios from 'axios';
+import api from '../../api';
 import { ToastContainer, toast } from 'react-toastify';
 
 const Feeds = () => {
@@ -31,8 +31,8 @@ const Feeds = () => {
   const fetchData = async() => {
     try{
       const [userData, postData] = await Promise.all([
-        await axios.get('http://localhost:4000/api/users/self',{withCredentials:true}),
-        await axios.get('http://localhost:4000/api/post/getAllPost')
+        await api.get('/api/users/self'),
+        await api.get('/api/post/getAllPost')
       ]);
       setPersonalData(userData.data.user);
       localStorage.setItem('userInfo', JSON.stringify(userData.data.user));

@@ -13,7 +13,7 @@ import ExpModal from '../../components/ExpModal/expModal';
 import MessageModal from '../../components/MessageModal/messageModal';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../api';
 import { useParams } from 'react-router-dom';
 import { ToastContainer,toast } from 'react-toastify';
 
@@ -50,9 +50,9 @@ const Profile = () => {
   const fetchDataOnLoad = async() => {
     try{
       const [userDatas,postDatas,ownDatas] = await  Promise.all([
-        axios.get(`http://localhost:4000/api/users/user/${id}`),
-        axios.get(`http://localhost:4000/api/post/getTop5Post/${id}`),
-        axios.get('http://localhost:4000/api/users/self',{withCredentials:true}),
+        api.get(`/api/users/user/${id}`),
+        api.get(`/api/post/getTop5Post/${id}`),
+        api.get('/api/users/self'),
       ]);
       
       setUserData(userDatas.data.user);
@@ -102,7 +102,7 @@ const Profile = () => {
   }
 
   const handleEditFunc = async(data) => {
-    await axios.put(`http://localhost:4000/api/users/update`,{user:data},{withCredentials:true}).then(res=>{
+    await api.put(`/api/users/update`,{user:data}).then(res=>{
       window.location.reload();
     }).catch ((err) => {
       console.log(err);
@@ -145,7 +145,7 @@ const Profile = () => {
     if(checkFriendStatus() === "Request Sent") return;
 
     if(checkFriendStatus() === "Connect"){
-      await axios.post('http://localhost:4000/api/users/sendFriendReq',{receiver:userData?._id},{withCredentials:true}).then(res=>{
+      await api.post('/api/users/sendFriendReq',{receiver:userData?._id}).then(res=>{
         toast.success(res.data.message);
         setTimeout(() => {
           window.location.reload();
@@ -155,7 +155,7 @@ const Profile = () => {
       toast.error(err?.response?.data?.error)
       })
     }else if(checkFriendStatus() === "Approve Request"){
-      await axios.post('http://localhost:4000/api/users/acceptFriendRequest',{friendId:userData?._id},{withCredentials:true}).then(res => {
+      await api.post('/api/users/acceptFriendRequest',{friendId:userData?._id}).then(res => {
         toast.success(res.data.message);
         setTimeout(() => {
           window.location.reload();
@@ -165,7 +165,7 @@ const Profile = () => {
       toast.error(err?.response?.data?.error)
       })
     } else {
-      await axios.delete(`http://localhost:4000/api/users/removeFromFriendList/${userData?._id}`,{withCredentials:true}).then(res=>{
+      await api.delete(`/api/users/removeFromFriendList/${userData?._id}`).then(res=>{
         toast.success(res.data.message);
         setTimeout(() => {
           window.location.reload();
@@ -179,7 +179,7 @@ const Profile = () => {
   }
 
   const handleLogout = async() => {
-    await axios.post('http://localhost:4000/api/users/logout',{},{withCredentials:true}).then(res=>{
+    await api.post('/api/users/logout',{}).then(res=>{
       localStorage.clear();
       window.location.reload();
     }).catch(err => {

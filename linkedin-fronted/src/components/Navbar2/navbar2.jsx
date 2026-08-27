@@ -8,7 +8,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import MessageIcon from '@mui/icons-material/Message';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../../api";
 
 const Navbar2 = () => {
   // const [dropdown, setDropDown] = useState(false);
@@ -37,7 +37,7 @@ const Navbar2 = () => {
   }, [debouncedTerm]);
 
   const searchAPICall = async() => {
-    await axios.get(`http://localhost:4000/api/users/findUser?query=${debouncedTerm}`,{withCredentials:true}).then(res=>{
+    await api.get(`/api/users/findUser?query=${debouncedTerm}`).then(res=>{
       console.log(res)
       
       setSearchUser(res.data.users)
@@ -48,7 +48,7 @@ const Navbar2 = () => {
   }
 
   const fetchNotification = async() => {
-    await axios.get('http://localhost:4000/api/notification/activeNotification',{withCredentials:true}).then(res=>{
+    await api.get('/api/notification/activeNotification').then(res=>{
       var count = res.data.count;
       setNotificationCount(count);
       

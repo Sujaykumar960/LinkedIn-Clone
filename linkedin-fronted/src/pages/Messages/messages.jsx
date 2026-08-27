@@ -6,6 +6,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ImageIcon from '@mui/icons-material/Image';
 import Advertisement from '../../components/Advertisement/advertisement';
 import axios from 'axios'
+import api from '../../api'
 import socket from '../../../socket' 
 
 const Messages = () => {
@@ -56,7 +57,7 @@ const Messages = () => {
     },[messages])
 
     const fetchMessages = async() => {
-        await axios.get(`http://localhost:4000/api/message/${activeConvId}`,{withCredentials:true}).then(res=>{
+        await api.get(`/api/message/${activeConvId}`).then(res=>{
             console.log(res);
             setMessages(res.data.message)
         }).catch(err => {
@@ -68,7 +69,7 @@ const Messages = () => {
     
 
     const fetchConversationOnLoad = async() => {
-        await axios.get('http://localhost:4000/api/conversation/get-conversation',{withCredentials:true}).then(res=>{
+        await api.get('/api/conversation/get-conversation').then(res=>{
             console.log(res.data.conversations)
             setConversations(res.data.conversations)
             setActiveConvId(res.data?.conversations[0]?._id)
@@ -101,7 +102,7 @@ const Messages = () => {
     }
 
     const handleSendMessage = async() => {
-        await axios.post(`http://localhost:4000/api/message`,{ conversation:activeConvId, message:messageText, picture:imageLink },{withCredentials:true}).then(res => {
+        await api.post(`/api/message`,{ conversation:activeConvId, message:messageText, picture:imageLink }).then(res => {
             socket.emit("sendMessage", activeConvId, res.data)
             setMessageText("")
             setImageLink(null)

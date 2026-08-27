@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import GoogleLoginComp from '../../components/GoogleLogin/googleLoginComp'
 import {ToastContainer, toast} from 'react-toastify'
-import axios from 'axios'
+import api from '../../api'
 
 const Login = (props) => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Login = (props) => {
         if(loginField.email.trim().length === 0 || loginField.password.trim().length === 0) {
             return toast.error("Please fill all credentials")
         }
-        await axios.post('http://localhost:4000/api/users/login',loginField,{withCredentials: true}).then((res)=>{
+        await api.post('/api/users/login',loginField).then((res)=>{
             props.changeloginValue(true);
             localStorage.setItem('isLogin', 'true');
             localStorage.setItem('userInfo', JSON.stringify(res.data.userExist));
