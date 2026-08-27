@@ -16,8 +16,7 @@ import Profile from './pages/Profile/profile'
 import AllActivities from './pages/AllActivities/allActivities'
 import SingleActivity from './pages/SingleActivity/singleActivity'
 import Notification from './pages/Notification/notification'
-
-import axios from 'axios';
+// import axios from 'axios';
 
 function App() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('isLogin'));
@@ -25,14 +24,6 @@ function App() {
   const changeloginValue = (val) => {
     setIsLogin(val);
   } 
-
-  
-
-  // useEffect(()=>{
-  //   fetchData();
-  // },[])
-
- 
 
   return (
     <div className='bg-gray-100 w-full h-full box-border'>

@@ -25,6 +25,25 @@ app.use(cors({
     origin: "http://localhost:5173"
 }))
 
+
+io.on('connection',(socket)=>{
+
+    console.log("User Connected")
+
+    socket.on("joinConversation", (conversationId) => {
+        console.log(`User joined Conversation ID of ${conversationId}`)
+        socket.join(conversationId)
+    })
+
+    socket.on("sendMessage",(convId,messageDetail)=>{
+        console.log("message sent")
+
+        io.to(convId).emit("receiveMessage", messageDetail)
+    })
+
+})
+
+
 const UserRoutes = require('./routes/user');
 const PostRoutes = require('./routes/post');
 const NotificationRoutes = require('./routes/notification');
@@ -41,6 +60,6 @@ app.use('/api/conversation', ConversationRoutes);
 app.use('/api/message', MessageRoutes);
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log("Backend Server is running on port", PORT)
 })
